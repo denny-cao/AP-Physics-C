@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+\title{Lab: Motion with Changing Acceleration}
+\author{Denny Cao}
+
+\maketitle
+
+\section{Procedure}
+The objective of the lab was to investigate the impact air resistance has on a free-falling object, 
+we dropped two objects. One was a ball which acted as a control, as the ball drops with little to no air resistance. 
+We also dropped a paper cone, in which air resistance greatly impacts the time it takes to reach its terminal velocity—free-fall.
+We made sure to measure the mass of the paper cone, $m = 0.005 \text{ kg}$, to use in calculations later on \\
+
+\noindent
+To collect data, we utilized the app Tracker to measure both the $y$-position in increments of $\Delta t$, 8.08 seconds.
+The app allowed us to track the velocity and the change in velocity—acceleration—for each $t$-step. \\
+
+\noindent
+We then graphed the data, graphing both position v. time and velocity v. time to 
+determine value of the acceleration due to gravity, $g$.
+
+\section{Data and Calculations}
+Upon finding the best regression model to use, 
+we used the velocity model of the cone to determine the terminal velocity, $v_\text{term}$. \\
+
+\noindent
+We can model the situation with:
+$$
+F_\text{net} = ma = mg - F_\text{air} \\
+$$
+
+\noindent
+where $F_\text{air}$ is the air resistance. We have two possible models of $F_\text{air}$:
+\begin{align*}
+    F_\text{air} = kv && F_\text{air} = kv^2
+\end{align*}
+
+\noindent
+where $k$ is some constant. \\
+
+\noindent
+We can determine $k$ for both models by using $v_\text{term}$, the value of $v$ as $t$ approaches $\infty$:
+\begin{align*}
+    ma &= mg - k_1v & ma &= mg - k_2v^2 \\
+    \lim_{t \rightarrow \infty}{ma} &= \lim_{t \rightarrow \infty}{mg - k_1v} & \lim_{t \rightarrow \infty}{ma} &= \lim_{t \rightarrow \infty}{mg - k_2v^2} \\
+    0 &= \lim_{t \rightarrow \infty}{mg - k_1v} & 0 &= \lim_{t \rightarrow \infty}{mg - k_2v^2} \\
+    -mg &= k_1v_\text{term} & -mg &= k_2v_{\text{term}}^2 \\
+    \frac{-0.005 \times 9.8}{v_\text{term}} &= k_1 & \frac{-0.005 \times 9.8}{v_{\text{term}}^2} &= k \\
+\end{align*}
+
+
+\section{Conclusions}
+
+\end{document}
