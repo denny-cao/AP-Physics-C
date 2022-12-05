@@ -22,7 +22,7 @@ We then graphed the data, graphing both position v. time and velocity v. time to
 determine value of the acceleration due to gravity, $g$.
 
 \section{Data and Calculations}
-Upon finding the best regression model to use, 
+Upon finding the best regression model to use, a logistic regression, 
 we used the velocity model of the cone to determine the terminal velocity, $v_\text{term}$. \\
 
 \noindent
@@ -47,7 +47,15 @@ We can determine $k$ for both models by using $v_\text{term}$, the value of $v$ 
     \lim_{t \rightarrow \infty}{ma} &= \lim_{t \rightarrow \infty}{mg - k_1v} & \lim_{t \rightarrow \infty}{ma} &= \lim_{t \rightarrow \infty}{mg - k_2v^2} \\
     0 &= \lim_{t \rightarrow \infty}{mg - k_1v} & 0 &= \lim_{t \rightarrow \infty}{mg - k_2v^2} \\
     -mg &= k_1v_\text{term} & -mg &= k_2v_{\text{term}}^2 \\
-    \frac{-0.005 \times 9.8}{v_\text{term}} &= k_1 & \frac{-0.005 \times 9.8}{v_{\text{term}}^2} &= k \\
+    \frac{mg}{v_\text{term}} &= k_1 & \frac{mg}{v_{\text{term}}^2} &= k_2 \\
+    \frac{0.049}{v_\text{term}} &= k_1 & \frac{0.049}{v_{\text{term}}^2} &= k_2 
+\end{align*}
+
+\noindent
+We can use $k_1$ and $k_2$ to determine whether $kv$ or $kv^2$ is a better approximation of $F_\text{air}$ by solving the force equation for acceleration 
+and comparing it to the derivative of the velocity model—acceleration.
+\begin{align*}
+    a_1(t) &= g - \frac{k_1v(t)}{m} & a_2(t) &= g - \frac{k_2v(t)^2}{m} 
 \end{align*}
 
 

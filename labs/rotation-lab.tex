@@ -1,0 +1,287 @@
+%++++++++++++++++++++++++++++++++++++++++
+\documentclass[article, 11pt]{article}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{tabu} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{tikz}
+\usepackage{caption} 
+\usepackage{fancyhdr}
+\usepackage{amssymb} % symbols like /therefore
+\usepackage{amsthm} % proofs
+\usepackage{enumerate} % lettered lists
+\usepackage{mathtools} % macros
+\usetikzlibrary{scopes}
+\usepackage{xcolor} \pagecolor[rgb]{0.12549019607,0.1294117647,0.13725490196} \color[rgb]{0.82352941176,0.76862745098,0.62745098039} % dark theme
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+\usepackage{siunitx} % units
+\usepackage{verbatim} 
+\newcommand{\labTitle}{Spinning Things Lab: The Windmill and I}
+\newcommand{\class}{AP Physics C}
+\newcommand{\professor}{Mr. Perkins}
+\newcommand{\name}{Denny Cao}
+\pagestyle{fancy}
+\fancyhf{}% clears all header and footer fields
+\fancyfoot[C]{--~\thepage~--}
+\renewcommand*{\headrulewidth}{0.4pt}
+\renewcommand*{\footrulewidth}{0pt}
+\lhead{\name}
+\chead{\class: \labTitle}
+\rhead{\professor}
+
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% clears all header and footer fields
+  \fancyfoot[C]{--~\thepage~--}%
+  \renewcommand*{\headrulewidth}{0pt}%
+  \renewcommand*{\footrulewidth}{0pt}%
+}
+
+
+% Shortcuts
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil} % ceil function
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % floor function
+
+\DeclarePairedDelimiter\paren{(}{)} % parenthesis
+
+\newcommand{\df}{\displaystyle\frac} % displaystyle fraction
+\newcommand{\qeq}{\overset{?}{=}} % questionable equality
+
+\newcommand{\Mod}[1]{\;\mathrm{mod}\; #1} % modulo operator
+
+% Sets
+\DeclarePairedDelimiter\set{\{}{\}}
+\newcommand{\unite}{\cup}
+\newcommand{\inter}{\cap}
+
+\newcommand{\reals}{\mathbb{R}} % real numbers: textbook is Z^+ and 0
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\rats}{\mathbb{Q}}
+
+
+% Counting
+\newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength\parindent{0pt}
+
+% Sign Charts
+\newdimen\tcolw \tcolw=2.5em % the column width
+\edef\ecatcode{\catcode`&=\the\catcode`&\relax}\catcode`&=4
+\def\sgchart#1#2{\vbox{\offinterlineskip\halign{\hfil##\quad&##\hfil\crcr\sgchartA#2,:,%
+   \omit\sgchartR&\kern.2pt\sgchartS{.5\tcolw}\relax\sgchartE#1,\relax,%
+   \sgchartS{.5\tcolw}\relax\cr
+   \noalign{\kern2pt}&\def~{}\kern.5\tcolw\sgchartD#1,\relax,\cr}}}
+\def\sgchartA#1:#2,{\cr\ifx,#1,\else $#1$&\sgchartB#2{}\expandafter\sgchartA\fi}
+\def\sgchartB#1{\hbox to\tcolw{\hss$#1$\hss}\sgchartC}
+\def\sgchartC#1{\ifx,#1,\else
+   \strut\vrule\kern-.4pt\hbox to\tcolw{\hss$#1$\hss}\expandafter\sgchartC\fi}
+\def\sgchartD#1#2,{\ifx\relax#1\else\hbox to\tcolw{\hss$#1#2$\hss}\expandafter\sgchartD\fi}
+\def\sgchartE#1#2,{\ifx\relax#1\else
+    \ifx~#1\sgchartS\tcolw\circ \else\sgchartS\tcolw\bullet\fi \expandafter\sgchartE\fi}
+\def\sgchartR{\leaders\vrule height2.8pt depth-2.4pt\hfil}
+\def\sgchartS#1#2{\hbox to#1{\kern-.2pt\sgchartR \ifx\relax#2\else
+   \kern-.7pt$#2$\kern-.7pt\sgchartR\fi\kern-.2pt}}
+\ecatcode
+%++++++++++++++++++++++++++++++++++++++++
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\labTitle}}
+    \normalsize\vspace{0.1in}\\
+    \vspace{0.1in}\large{\text{\class: \professor}}
+    \vspace{3in}
+}
+
+\author{\name}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{empty}
+    \pagebreak
+    
+    \section{Observed Acceleration}
+    \subsection{Procedure}
+    \noindent 
+    Using a windmill with 4 rods with weights at their ends, we wounded a string on the rung of the windmill, attaching a 100g to the end of the string. We then dropped the weight 0.77m and measured the time it took to reach the bottom. After the weight dropped, we measured the time it took for the windmill to make 10 revolutions to compute the angular velocity of the windmill. With this, we were able to compute the angular acceleration and moment of inertia of the windmill.
+
+    \subsection{Data}
+    \begin{figure}[H]
+        \begin{center}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \textbf{Measurement} & \textbf{Variable} & \textbf{Value} \\
+                \hline
+                Distance & $h$ & \SI{0.77}{\meter} \\
+                Mass of dropped weight & $m$ & \SI{0.1}{\kilogram} \\
+                Time to drop & $t_d$ & \SI{20.08}{\second} \\
+                Time to make 10 revolutions & $t_r$ & \SI{16.13}{\second} \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Recorded Data}
+    \end{figure}
+
+    \subsection{Analysis}
+    \textbf{Angular Velocity After Weight Dropped:}
+    \begin{align*}
+        \omega   &= \frac{\theta}{t}  \\
+        \omega_f &= \frac{2\pi(10)}{t_r} = \frac{20\pi}{16.13} \\
+                 &\approx \SI{3.895}{\frac{\radian}{\second}}
+    \end{align*}
+    \textbf{Angular Acceleration:}
+    \begin{align*}
+        \alpha &= \frac{\omega_f - \omega_i}{t} \\
+               &= \frac{3.895 - 0}{20.08} \\
+               &\approx \SI{0.194}{\frac{\radian}{\second^2}}
+    \end{align*}
+    \textbf{Moment of Inertia:}
+    \begin{align*}
+        mgh &= \frac{1}{2}I\omega_f^2 \\
+        I   &= \frac{2mgh}{\omega_f^2} \\
+            &= \frac{2(0.1)(9.81)(0.77)}{(3.895)^2} \\
+            &\approx \SI{0.09958}{\kilogram\meter^2}
+    \end{align*}
+
+    \section{Theoretical Acceleration}
+    \subsection{Procedure}
+    \noindent
+    We recorded the masses of the rods, weights, and the center of the windmill as well as the lengths of the rods. We then used the Parallel Axis Theorem, combining the moment of inertia of the rods and the moment of inertia of the weights to compute the moment of inertia of the windmill.
+
+    \subsection{Data}
+    \begin{figure}[H]
+        \begin{center}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \textbf{Measurement} & \textbf{Variable} & \textbf{Value} \\
+                \hline
+                Mass of rod & $m_r$ & \SI{0.074}{\kilogram} \\
+                Mass of weight & $m_w$ & \SI{0.186}{\kilogram} \\
+                Radius of weight & $r_w$ & \SI{0.34}{\meter} \\
+                Length of rod & $l$ & \SI{0.3}{\meter} \\
+                Distance from center to rod & $d_r$ & \SI{0.05}{\meter} \\
+                Distance from center to weight & $d_w$ & \SI{0.33}{\meter} \\
+                Moment of inertia of pulley assembly alone & $I_p$ & \SI{0.00058}{\kilogram\meter^2} \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Recorded Data}
+    \end{figure}
+    \subsection{Analysis}
+    \begin{comment}
+
+    The moment of inertia for the windmill is given by:
+    \begin{equation*}
+        I = I_{\text{pulley}} + 4I_{\text{rod}} + 4I_{\text{weight}} + 4I_{\text{parallel axis contribution}}
+    \end{equation*}
+    Where $I_p$ is the moment of inertia of the pulley assembly alone, $I_r$ is the moment of inertia of one rod, and $I_w$ is the moment of inertia of one weight. The Parallel Axis Theorem can be used to find the moment of inertia of an object, $o$ about an axis parallel to the axis of rotation:
+    \begin{equation*}
+        I_o = I_{cm} + Md^2 
+    \end{equation*}
+    where $I_{cm}$ is the moment of inertia of the object about its center of mass, $M$ is the mass of the object, and $d$ is the distance from the center of mass to the axis of rotation. \\
+    
+    We can use this to find the moment of inertia of the rods and weights: \\
+
+    \textbf{Moment of Inertia of Rod $I_r$:}
+    \begin{align*}
+        I_r &= I_{r_{cm}} + m_r(d_r)^2 \\
+        \intertext{The moment of inertia of a rod about its end is given by: $I = \df{1}{3}ml^2$}
+            &= \frac{1}{3}m_r l^2 + m_r(d_r)^2 \\
+            &= \frac{1}{3}(0.074)(0.3)^2 + (0.074)(0.05)^2 \\
+            &\approx \SI{0.0024}{\kilogram\meter^2}
+    \end{align*}
+    \textbf{Moment of Inertia of Weight $I_w$:}
+    \begin{align*}
+        I_w &= I_{w_{cm}} + m_w(d_w)^2 \\
+    \intertext{The moment of inertia of a point mass is given by: $I = mr^2$} 
+            &= m_w(r_w)^2 + m_w(d_w)^2 \\
+            &= (0.186)(0.1)^2 + (0.186)(0.33)^2 \\
+            &\approx \SI{0.0221}{\kilogram\meter^2}
+    \end{align*}
+    \textbf{Moment of Inertia of Windmill:}
+    \begin{align*}
+        I &= I_p + 4I_r + 4I_w \\
+          &= 0.00058 + 4(0.0024) + 4(0.0221) \\
+          &= \SI{0.9858}{\kilogram\meter^2}
+    \end{align*}
+    \end{comment}
+    \begin{comment}
+    \textbf{Moment of Inertia of Rod $I_\text{rod}$:}
+    \begin{align*}
+        I_r &= \int r^2 dm \\
+            &= \frac{m_r}{l} \int_{d_r}^{l + d_r} {x^2 dx} \\
+            &= \frac{0.074}{0.3} \int_{0.05}^{0.35} {x^2 dx} \\
+            &\approx 0.003515
+    \end{align*}
+    \textbf{Moment of Inertia of Weight $I_\text{weight}$:}
+    \begin{align*}
+    \intertext{The inertia of a point mass is given by $I = mr^2$}
+        I_w &= m_w(r_w)^2 \\
+            &= (0.186)(0.34)^2 \\
+            &\approx 0.0215
+    \end{align*}
+    \textbf{Parallel Axis Contribution $I_\text{parallel axis contribution}$:}
+    \begin{align*}
+        I_\text{pac} &= m_w(d_w)^2 \\
+            &= (0.186)(0.33)^2 \\
+            &\approx 0.0203
+    \end{align*}
+    \textbf{Moment of Inertia of Windmill:}
+    \begin{align*}
+        I &= I_{\text{pulley}} + 4I_{\text{rod}} + 4I_{\text{weight}} + 4I_{\text{parallel axis contribution}} \\
+            &= 0.00058 + 4(0.003515) + 4(0.0215) + 4(0.0203) \\
+            &\approx 0.18184
+    \end{align*}
+    \end{comment}
+    
+    The moment of inertia of the windmill is given by:
+    \begin{equation*}
+        I = I_p + 4I_r + 4I_w 
+    \end{equation*}
+    \textbf{Inertia of Rod $I_r$:} 
+    \begin{align*}
+        I_r &= \int r^2 dm \\
+            &= \frac{m_r}{l} \int_{d_r}^{l + d_r} {x^2 dx} \\
+            &= \frac{0.074}{0.3} \int_{0.05}^{0.35} {x^2 dx} \\
+            &\approx \SI{0.00352}{\kilogram\meter^2}
+    \end{align*}
+    \textbf{Inertia of Weight $I_w$:}
+    \begin{align*}
+        I_w &= m_w(r_w)^2 \\
+            &= (0.186)(0.34)^2 \\
+            &\approx \SI{0.02150}{\kilogram\meter^2}
+    \end{align*}
+    \textbf{Inertia of Windmill:}
+    \begin{align*}
+        I &= I_p + 4I_r + 4I_w \\
+            &= 0.00058 + 4(0.00352) + 4(0.02150) \\
+            &\approx \SI{0.10066}{\kilogram\meter^2}
+    \end{align*}
+    \section{Conclusion}
+    \noindent
+    The percent error in the moment of inertia of the windmill is given by:
+    \begin{align*}
+        \delta &= \frac{|I_A - I_E|}{I_E} \cdot 100\% \\
+            &= \frac{|0.10066 - 0.09958|}{0.09958} \cdot 100\% \\
+            &\approx 1.08\% 
+    \end{align*}
+    This error is negligible and can be attributed to how the expected value is calculated without accounting for non-conservative forces such as friction and air resistance. With friction, the angular velocity would be lower than the expected angular velocity, and thus the moment of inertia would be lower than the expected moment of inertia. With air resistance, the time for the 100g weight would be longer than the expected time, and thus the moment of inertia would be lower than the expected moment of inertia. These forces, as well as others, cause a loss in energy. This can be calculated by using the equation for energy conservation:
+    \begin{align*}
+        E_E                      &= E_A + W_\text{lost} \\
+        \frac{1}{2}I_E\omega_E^2 &= \frac{1}{2}I_A\omega_A^2 + W_\text{lost} \\
+    \end{align*}
+\end{document}
