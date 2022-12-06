@@ -50,7 +50,6 @@
   \renewcommand*{\footrulewidth}{0pt}%
 }
 
-
 % Shortcuts
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil} % ceil function
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % floor function
@@ -129,7 +128,7 @@
                 Distance & $h$ & \SI{0.77}{\meter} \\
                 Mass of dropped weight & $m$ & \SI{0.1}{\kilogram} \\
                 Time to drop & $t_d$ & \SI{20.08}{\second} \\
-                Time to make 10 revolutions & $t_r$ & \SI{16.13}{\second} \\
+                Time to make 10 revolutions & $t_r$ & \SI{16.9}{\second} \\
                 \hline
             \end{tabular}
         \end{center}
@@ -140,27 +139,27 @@
     \textbf{Angular Velocity After Weight Dropped:}
     \begin{align*}
         \omega   &= \frac{\theta}{t}  \\
-        \omega_f &= \frac{2\pi(10)}{t_r} = \frac{20\pi}{16.13} \\
-                 &\approx \SI{3.895}{\frac{\radian}{\second}}
+        \omega_f &= \frac{2\pi(10)}{t_r} = \frac{20\pi}{16.9} \\
+                 &\approx \SI{3.7179}{\frac{\radian}{\second}}
     \end{align*}
     \textbf{Angular Acceleration:}
     \begin{align*}
         \alpha &= \frac{\omega_f - \omega_i}{t} \\
-               &= \frac{3.895 - 0}{20.08} \\
-               &\approx \SI{0.194}{\frac{\radian}{\second^2}}
+               &= \frac{3.7179 - 0}{20.08} \\
+               &\approx \SI{0.1852}{\frac{\radian}{\second^2}}
     \end{align*}
     \textbf{Moment of Inertia:}
     \begin{align*}
-        mgh &= \frac{1}{2}I\omega_f^2 \\
-        I   &= \frac{2mgh}{\omega_f^2} \\
-            &= \frac{2(0.1)(9.81)(0.77)}{(3.895)^2} \\
-            &\approx \SI{0.09958}{\kilogram\meter^2}
+        mgh &= \frac{1}{2}I{\omega_f}^2 \\
+        I   &= \frac{2mgh}{{\omega_f}^2} \\
+            &= \frac{2(0.1)(9.81)(0.77)}{(3.7179)^2} \\
+            &\approx \SI{0.10929}{\kilogram\meter^2}
     \end{align*}
 
     \section{Theoretical Acceleration}
     \subsection{Procedure}
     \noindent
-    We recorded the masses of the rods, weights, and the center of the windmill as well as the lengths of the rods. We then used the Parallel Axis Theorem, combining the moment of inertia of the rods and the moment of inertia of the weights to compute the moment of inertia of the windmill.
+    We recorded the masses of the rods, weights, and the center of the windmill as well as the lengths of the rods. Since the rod is inserted into the pivot of the windmill but does not go to the center, we measured the distance from the pivot to the rod to compute the moment of inertia. 
 
     \subsection{Data}
     \begin{figure}[H]
@@ -276,12 +275,91 @@
     The percent error in the moment of inertia of the windmill is given by:
     \begin{align*}
         \delta &= \frac{|I_A - I_E|}{I_E} \cdot 100\% \\
-            &= \frac{|0.10066 - 0.09958|}{0.09958} \cdot 100\% \\
-            &\approx 1.08\% 
+               &= \frac{|0.10929 - 0.10066|}{0.10066} \cdot 100\% \\
+               &= 8.57\%
     \end{align*}
-    This error is negligible and can be attributed to how the expected value is calculated without accounting for non-conservative forces such as friction and air resistance. With friction, the angular velocity would be lower than the expected angular velocity, and thus the moment of inertia would be lower than the expected moment of inertia. With air resistance, the time for the 100g weight would be longer than the expected time, and thus the moment of inertia would be lower than the expected moment of inertia. These forces, as well as others, cause a loss in energy. This can be calculated by using the equation for energy conservation:
+    This is a relatively small error that can be attributed to the fact that the theoretical calculations disregarded non-conservative forces such as friction and air resistance. This is also why it is reasonable that $I_A > I_E$. Friction and air resistance cause the windmill to have a decrease in angular velocity, and thus an increase in moment of inertia from the equation $I = \df{1}{2}I\omega^2$. We will compute the energy lost.
+    \begin{comment}
     \begin{align*}
         E_E                      &= E_A + W_\text{lost} \\
-        \frac{1}{2}I_E\omega_E^2 &= \frac{1}{2}I_A\omega_A^2 + W_\text{lost} \\
+        \frac{1}{2}I_E\omega_E^2 &= \frac{1}{2}I_A\omega_A^2 + W_\text{lost} 
     \end{align*}
+    We first compute $\omega_E$, the angular velocity of the expected angular velocity:
+    \begin{align*}
+        mgh      &= \frac{1}{2}I_E\omega_E^2 \\
+        \omega_E &= \sqrt{\frac{2mgh}{I_E}} \\
+                 &= \sqrt{\frac{2(0.1)(9.81)(0.77)}{0.10066}} \\
+                 &\approx \SI{3.8741}{\frac{\radian}{\second}}
+    \end{align*}
+    \end{comment}
+    \begin{align*}
+        \tau &= F \times r \\
+        \tau &= I \alpha \\
+        F \times r &= I \alpha \\
+        \alpha &= \frac{F \times r}{I}
+    \end{align*}
+    Let $F$ be the tension force and $r$ be the distance from the center of the pulley to the string. We first solve for $F$.
+    \begin{equation*}
+        F = F_W - F_\text{net}
+    \end{equation*}
+    \begin{align*}
+        F_\text{net} &= ma \\
+        a &= \frac{2h}{{t_d}^2} \\
+        F_\text{net} &= m\frac{2h}{{t_d}^2} \\
+        F_W &= mg
+    \end{align*}
+    \begin{align*}
+        F &= mg - m\frac{2h}{{t_d}^2} \\
+          &= (0.1)(9.81) - (0.1)\frac{2(0.77)}{20.08^2} \\
+          &\approx \SI{0.9806}{\newton}
+    \end{align*}
+    We can compute the angular acceleration of the windmill using:
+    \begin{alignat*}{2}
+        \begin{aligned}
+            \alpha_A  &= \frac{F \times r}{I_A} \\
+                      &= \frac{0.9806(0.02)}{0.10929} \\
+                      &\approx \SI{0.1794}{\frac{\radian}{\second^2}}
+        \end{aligned} \quad &
+        \begin{aligned}
+            \alpha_E &= \frac{F \times r}{I_E} \\
+                     &= \frac{0.9806(0.02)}{0.10066} \\
+                     &\approx \SI{0.1948}{\frac{\radian}{\second^2}}
+        \end{aligned}
+    \end{alignat*}
+    We can compute the final angular velocity of the windmill using:
+    \begin{equation*}
+        \omega = \omega_0 + \alpha t
+    \end{equation*}
+    \begin{alignat*}{2}
+        \begin{aligned}
+            \omega_A &= 0.1794(20.08) \\
+                     &\approx \SI{3.6024}{\frac{\radian}{\second}}
+        \end{aligned} \quad &
+        \begin{aligned}0.1948(20.08) \\
+                     &= \SI{3.9116}{\frac{\radian}{\second}}
+        \end{aligned}
+    \end{alignat*}
 \end{document}
+
+\begin{comment}
+mgh = 1/2 iw^2
+since i down, w^2 up 
+we are finding what causes w^2 to slow down
+energy in system is same. both equal mgh. 
+
+1/2 iw^2 + wlost = mgh 
+in the case of theoreical, wlost = 0. therefore, 1/2 iw^2 = mgh. 
+but what about in the case of actual? we directly solve 1/2iw^2. So what
+we essentially have is:
+
+1/2 i_e w_e^2 = mgh
+1/2 i_a w_a^2 = mgh
+we can compare torques.
+torque = r x f
+r x f = I alpha
+r x f will be the same for both.
+
+what can we do with acceleration. 
+backsolve for w_e^2 and w_a^2.
+then we can compare energies. 
+\end{comment}

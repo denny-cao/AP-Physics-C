@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1670207770 "/home/akkaro/ap_physics_c/labs/rotation-lab.tex" "rotation-lab.pdf" "rotation-lab" 1670207771
-  "/home/akkaro/ap_physics_c/labs/rotation-lab.tex" 1670207769 12043 8ebb980fa61e48f7acf0bfbee2b0b4db ""
+["pdflatex"] 1670313477 "/home/akkaro/ap_physics_c/labs/rotation-lab.tex" "rotation-lab.pdf" "rotation-lab" 1670313478
+  "/home/akkaro/ap_physics_c/labs/rotation-lab.tex" 1670313476 14538 9d827b5c076fe0f035befd8724ecc09b ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -177,9 +177,9 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1666161220 4595883 1a8137d784f6ac4a90cecb4bdd05a7cf ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1666161259 3058865 e4f58d72146e9845b97136b6e6ac75ce ""
   "/usr/local/texlive/2022/texmf.cnf" 1666161215 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "rotation-lab.aux" 1670207771 1862 c5f0d8558c0b7cd4294906c25b853741 "pdflatex"
-  "rotation-lab.out" 1670207771 962 01bcd8621be22d72b8cdfe75a2d2913d "pdflatex"
-  "rotation-lab.tex" 1670207769 12043 8ebb980fa61e48f7acf0bfbee2b0b4db ""
+  "rotation-lab.aux" 1670313478 1862 c3c19f5368aecc68ebccd15c9fb319a5 "pdflatex"
+  "rotation-lab.out" 1670313478 962 01bcd8621be22d72b8cdfe75a2d2913d "pdflatex"
+  "rotation-lab.tex" 1670313476 14538 9d827b5c076fe0f035befd8724ecc09b ""
   (generated)
   "rotation-lab.aux"
   "rotation-lab.log"
