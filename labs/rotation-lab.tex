@@ -171,6 +171,7 @@
                 Mass of rod & $m_r$ & \SI{0.074}{\kilogram} \\
                 Mass of weight & $m_w$ & \SI{0.186}{\kilogram} \\
                 Radius of weight & $r_w$ & \SI{0.34}{\meter} \\
+                Radius of pulley & $r_p$ & \SI{0.02}{\meter} \\
                 Length of rod & $l$ & \SI{0.3}{\meter} \\
                 Distance from center to rod & $d_r$ & \SI{0.05}{\meter} \\
                 Distance from center to weight & $d_w$ & \SI{0.33}{\meter} \\
@@ -278,11 +279,11 @@
                &= \frac{|0.10929 - 0.10066|}{0.10066} \cdot 100\% \\
                &= 8.57\%
     \end{align*}
-    This is a relatively small error that can be attributed to the fact that the theoretical calculations disregarded non-conservative forces such as friction and air resistance. This is also why it is reasonable that $I_A > I_E$. Friction and air resistance cause the windmill to have a decrease in angular velocity, and thus an increase in moment of inertia from the equation $I = \df{1}{2}I\omega^2$. We will compute the energy lost.
+    This is a relatively small error that can be attributed to the fact that the theoretical calculations disregarded non-conservative forces such as friction and air resistance. This is also why it is reasonable that $I_A > I_E$. Friction and air resistance cause the windmill to have a decrease in angular velocity, and thus an increase in moment of inertia from the equation $mgh = \df{1}{2}I\omega^2$. We will compute the energy lost.
     \begin{comment}
     \begin{align*}
-        E_E                      &= E_A + W_\text{lost} \\
-        \frac{1}{2}I_E\omega_E^2 &= \frac{1}{2}I_A\omega_A^2 + W_\text{lost} 
+        E_E                      &= E_A + E_\text{lost} \\
+        \frac{1}{2}I_E\omega_E^2 &= \frac{1}{2}I_A\omega_A^2 + E_\text{lost} 
     \end{align*}
     We first compute $\omega_E$, the angular velocity of the expected angular velocity:
     \begin{align*}
@@ -292,28 +293,32 @@
                  &\approx \SI{3.8741}{\frac{\radian}{\second}}
     \end{align*}
     \end{comment}
+    Let $F$ be the tension force. Let $F_W$ be the force of gravity. We first solve for $F$:
+    \begin{equation*}
+        F = F_W - F_\text{net}
+    \end{equation*}
+    \begin{alignat*}{2}
+        \begin{aligned}
+            F_\text{net} &= ma \\
+                       a &= \frac{2h}{{t_d}^2} \\
+            F_\text{net} &= m\frac{2h}{{t_d}^2}
+        \end{aligned} & \quad
+        \begin{aligned}
+            F_W &= mg
+        \end{aligned}
+    \end{alignat*}
+    \begin{align*}
+        F &= mg - m\frac{2h}{{t_d}^2} \\
+          &= (0.1)(9.81) - (0.1)\frac{2(0.77)}{(20.08)^2} \\
+          &\approx \SI{0.9806}{\newton}
+    \end{align*}
+    Let $r$ be the radius of the pulley. We can compute the angular acceleration of the windmill using:
     \begin{align*}
         \tau &= F \times r \\
         \tau &= I \alpha \\
         F \times r &= I \alpha \\
         \alpha &= \frac{F \times r}{I}
     \end{align*}
-    Let $F$ be the tension force and $r$ be the distance from the center of the pulley to the string. We first solve for $F$.
-    \begin{equation*}
-        F = F_W - F_\text{net}
-    \end{equation*}
-    \begin{align*}
-        F_\text{net} &= ma \\
-        a &= \frac{2h}{{t_d}^2} \\
-        F_\text{net} &= m\frac{2h}{{t_d}^2} \\
-        F_W &= mg
-    \end{align*}
-    \begin{align*}
-        F &= mg - m\frac{2h}{{t_d}^2} \\
-          &= (0.1)(9.81) - (0.1)\frac{2(0.77)}{20.08^2} \\
-          &\approx \SI{0.9806}{\newton}
-    \end{align*}
-    We can compute the angular acceleration of the windmill using:
     \begin{alignat*}{2}
         \begin{aligned}
             \alpha_A  &= \frac{F \times r}{I_A} \\
@@ -335,10 +340,25 @@
             \omega_A &= 0.1794(20.08) \\
                      &\approx \SI{3.6024}{\frac{\radian}{\second}}
         \end{aligned} \quad &
-        \begin{aligned}0.1948(20.08) \\
-                     &= \SI{3.9116}{\frac{\radian}{\second}}
+        \begin{aligned}
+            \omega_E &= 0.1948(20.08) \\
+                     &\approx \SI{3.9116}{\frac{\radian}{\second}}
         \end{aligned}
     \end{alignat*}
+    We can compute the energy lost using:
+    \begin{equation*}
+        E_\text{lost} = \frac{1}{2}I_E{\omega_E}^2 - \frac{1}{2}I_A{\omega_A}^2
+    \end{equation*}
+    \begin{align*}
+        E_\text{lost} &= \frac{1}{2}(0.10066)(3.9116)^2 - \frac{1}{2}(0.10929)(3.6024)^2 \\
+        &\approx \SI{0.0609}{\joule}
+    \end{align*}
+    The percentage of energy that is lost is:
+    \begin{align*}
+        \delta_E &= \frac{E_\text{lost}}{E_A} \cdot 100\% \\
+                 &= \frac{0.0609}{\frac{1}{2}(0.10066)(3.9116)^2} \cdot 100\% \\
+                 &= 7.9083\%
+    \end{align*}
 \end{document}
 
 \begin{comment}
