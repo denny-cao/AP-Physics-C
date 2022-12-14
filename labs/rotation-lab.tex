@@ -182,72 +182,6 @@
         \caption{Recorded Data}
     \end{figure}
     \subsection{Analysis}
-    \begin{comment}
-
-    The moment of inertia for the windmill is given by:
-    \begin{equation*}
-        I = I_{\text{pulley}} + 4I_{\text{rod}} + 4I_{\text{weight}} + 4I_{\text{parallel axis contribution}}
-    \end{equation*}
-    Where $I_p$ is the moment of inertia of the pulley assembly alone, $I_r$ is the moment of inertia of one rod, and $I_w$ is the moment of inertia of one weight. The Parallel Axis Theorem can be used to find the moment of inertia of an object, $o$ about an axis parallel to the axis of rotation:
-    \begin{equation*}
-        I_o = I_{cm} + Md^2 
-    \end{equation*}
-    where $I_{cm}$ is the moment of inertia of the object about its center of mass, $M$ is the mass of the object, and $d$ is the distance from the center of mass to the axis of rotation. \\
-    
-    We can use this to find the moment of inertia of the rods and weights: \\
-
-    \textbf{Moment of Inertia of Rod $I_r$:}
-    \begin{align*}
-        I_r &= I_{r_{cm}} + m_r(d_r)^2 \\
-        \intertext{The moment of inertia of a rod about its end is given by: $I = \df{1}{3}ml^2$}
-            &= \frac{1}{3}m_r l^2 + m_r(d_r)^2 \\
-            &= \frac{1}{3}(0.074)(0.3)^2 + (0.074)(0.05)^2 \\
-            &\approx \SI{0.0024}{\kilogram\meter^2}
-    \end{align*}
-    \textbf{Moment of Inertia of Weight $I_w$:}
-    \begin{align*}
-        I_w &= I_{w_{cm}} + m_w(d_w)^2 \\
-    \intertext{The moment of inertia of a point mass is given by: $I = mr^2$} 
-            &= m_w(r_w)^2 + m_w(d_w)^2 \\
-            &= (0.186)(0.1)^2 + (0.186)(0.33)^2 \\
-            &\approx \SI{0.0221}{\kilogram\meter^2}
-    \end{align*}
-    \textbf{Moment of Inertia of Windmill:}
-    \begin{align*}
-        I &= I_p + 4I_r + 4I_w \\
-          &= 0.00058 + 4(0.0024) + 4(0.0221) \\
-          &= \SI{0.9858}{\kilogram\meter^2}
-    \end{align*}
-    \end{comment}
-    \begin{comment}
-    \textbf{Moment of Inertia of Rod $I_\text{rod}$:}
-    \begin{align*}
-        I_r &= \int r^2 dm \\
-            &= \frac{m_r}{l} \int_{d_r}^{l + d_r} {x^2 dx} \\
-            &= \frac{0.074}{0.3} \int_{0.05}^{0.35} {x^2 dx} \\
-            &\approx 0.003515
-    \end{align*}
-    \textbf{Moment of Inertia of Weight $I_\text{weight}$:}
-    \begin{align*}
-    \intertext{The inertia of a point mass is given by $I = mr^2$}
-        I_w &= m_w(r_w)^2 \\
-            &= (0.186)(0.34)^2 \\
-            &\approx 0.0215
-    \end{align*}
-    \textbf{Parallel Axis Contribution $I_\text{parallel axis contribution}$:}
-    \begin{align*}
-        I_\text{pac} &= m_w(d_w)^2 \\
-            &= (0.186)(0.33)^2 \\
-            &\approx 0.0203
-    \end{align*}
-    \textbf{Moment of Inertia of Windmill:}
-    \begin{align*}
-        I &= I_{\text{pulley}} + 4I_{\text{rod}} + 4I_{\text{weight}} + 4I_{\text{parallel axis contribution}} \\
-            &= 0.00058 + 4(0.003515) + 4(0.0215) + 4(0.0203) \\
-            &\approx 0.18184
-    \end{align*}
-    \end{comment}
-    
     The moment of inertia of the windmill is given by:
     \begin{equation*}
         I = I_p + 4I_r + 4I_w 
@@ -280,19 +214,6 @@
                &= 8.57\%
     \end{align*}
     This is a relatively small error that can be attributed to the fact that the theoretical calculations disregarded non-conservative forces such as friction and air resistance. This is also why it is reasonable that $I_A > I_E$. Friction and air resistance cause the windmill to have a decrease in angular velocity, and thus an increase in moment of inertia from the equation $mgh = \df{1}{2}I\omega^2$. We will compute the energy lost.
-    \begin{comment}
-    \begin{align*}
-        E_E                      &= E_A + E_\text{lost} \\
-        \frac{1}{2}I_E\omega_E^2 &= \frac{1}{2}I_A\omega_A^2 + E_\text{lost} 
-    \end{align*}
-    We first compute $\omega_E$, the angular velocity of the expected angular velocity:
-    \begin{align*}
-        mgh      &= \frac{1}{2}I_E\omega_E^2 \\
-        \omega_E &= \sqrt{\frac{2mgh}{I_E}} \\
-                 &= \sqrt{\frac{2(0.1)(9.81)(0.77)}{0.10066}} \\
-                 &\approx \SI{3.8741}{\frac{\radian}{\second}}
-    \end{align*}
-    \end{comment}
     Let $F$ be the tension force. Let $F_W$ be the force of gravity. We first solve for $F$:
     \begin{equation*}
         F = F_W - F_\text{net}
@@ -359,27 +280,8 @@
                  &= \frac{0.0609}{\frac{1}{2}(0.10066)(3.9116)^2} \cdot 100\% \\
                  &= 7.9083\%
     \end{align*}
+    Due to this loss of energy in the system, the measured moment of inertia is greater,
+    as with less energy, the angular velocity is slower meaning the windmill is more
+    ``stiff'' and less resilient to rotating and thus has a greater moment of inertia.
 \end{document}
-
-\begin{comment}
-mgh = 1/2 iw^2
-since i down, w^2 up 
-we are finding what causes w^2 to slow down
-energy in system is same. both equal mgh. 
-
-1/2 iw^2 + wlost = mgh 
-in the case of theoreical, wlost = 0. therefore, 1/2 iw^2 = mgh. 
-but what about in the case of actual? we directly solve 1/2iw^2. So what
-we essentially have is:
-
-1/2 i_e w_e^2 = mgh
-1/2 i_a w_a^2 = mgh
-we can compare torques.
-torque = r x f
-r x f = I alpha
-r x f will be the same for both.
-
-what can we do with acceleration. 
-backsolve for w_e^2 and w_a^2.
-then we can compare energies. 
 \end{comment}
