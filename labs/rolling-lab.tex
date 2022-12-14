@@ -1,0 +1,171 @@
+%++++++++++++++++++++++++++++++++++++++++
+\documentclass[article, 11pt]{article}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{tabu} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{tikz}
+\usepackage{caption} 
+\usepackage{fancyhdr}
+\usepackage{amssymb} % symbols like /therefore
+\usepackage{amsthm} % proofs
+\usepackage{enumerate} % lettered lists
+\usepackage{mathtools} % macros
+\usetikzlibrary{scopes}
+\usepackage{xcolor} \pagecolor[rgb]{0.12549019607,0.1294117647,0.13725490196} \color[rgb]{0.82352941176,0.76862745098,0.62745098039} % dark theme
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+\usepackage{siunitx} % units
+\usepackage{verbatim} 
+\newcommand{\labTitle}{Spinning Things Lab: Rollin' Down the Railway}
+\newcommand{\class}{AP Physics C}
+\newcommand{\professor}{Mr. Perkins}
+\newcommand{\name}{Denny Cao}
+\pagestyle{fancy}
+\fancyhf{}% clears all header and footer fields
+\fancyfoot[C]{--~\thepage~--}
+\renewcommand*{\headrulewidth}{0.4pt}
+\renewcommand*{\footrulewidth}{0pt}
+\lhead{\name}
+\chead{\class: \labTitle}
+\rhead{\professor}
+
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% clears all header and footer fields
+  \fancyfoot[C]{--~\thepage~--}%
+  \renewcommand*{\headrulewidth}{0pt}%
+  \renewcommand*{\footrulewidth}{0pt}%
+}
+
+% Shortcuts
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil} % ceil function
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % floor function
+
+\DeclarePairedDelimiter\paren{(}{)} % parenthesis
+
+\newcommand{\df}{\displaystyle\frac} % displaystyle fraction
+\newcommand{\qeq}{\overset{?}{=}} % questionable equality
+
+\newcommand{\Mod}[1]{\;\mathrm{mod}\; #1} % modulo operator
+
+% Sets
+\DeclarePairedDelimiter\set{\{}{\}}
+\newcommand{\unite}{\cup}
+\newcommand{\inter}{\cap}
+
+\newcommand{\reals}{\mathbb{R}} % real numbers: textbook is Z^+ and 0
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\rats}{\mathbb{Q}}
+
+
+% Counting
+\newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength\parindent{0pt}
+
+% Sign Charts
+\newdimen\tcolw \tcolw=2.5em % the column width
+\edef\ecatcode{\catcode`&=\the\catcode`&\relax}\catcode`&=4
+\def\sgchart#1#2{\vbox{\offinterlineskip\halign{\hfil##\quad&##\hfil\crcr\sgchartA#2,:,%
+   \omit\sgchartR&\kern.2pt\sgchartS{.5\tcolw}\relax\sgchartE#1,\relax,%
+   \sgchartS{.5\tcolw}\relax\cr
+   \noalign{\kern2pt}&\def~{}\kern.5\tcolw\sgchartD#1,\relax,\cr}}}
+\def\sgchartA#1:#2,{\cr\ifx,#1,\else $#1$&\sgchartB#2{}\expandafter\sgchartA\fi}
+\def\sgchartB#1{\hbox to\tcolw{\hss$#1$\hss}\sgchartC}
+\def\sgchartC#1{\ifx,#1,\else
+   \strut\vrule\kern-.4pt\hbox to\tcolw{\hss$#1$\hss}\expandafter\sgchartC\fi}
+\def\sgchartD#1#2,{\ifx\relax#1\else\hbox to\tcolw{\hss$#1#2$\hss}\expandafter\sgchartD\fi}
+\def\sgchartE#1#2,{\ifx\relax#1\else
+    \ifx~#1\sgchartS\tcolw\circ \else\sgchartS\tcolw\bullet\fi \expandafter\sgchartE\fi}
+\def\sgchartR{\leaders\vrule height2.8pt depth-2.4pt\hfil}
+\def\sgchartS#1#2{\hbox to#1{\kern-.2pt\sgchartR \ifx\relax#2\else
+   \kern-.7pt$#2$\kern-.7pt\sgchartR\fi\kern-.2pt}}
+\ecatcode
+%++++++++++++++++++++++++++++++++++++++++
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\labTitle}}
+    \normalsize\vspace{0.1in}\\
+    \vspace{0.1in}\large{\text{\class: \professor}}
+    \vspace{3in}
+}
+
+\author{\name}
+\date{November 30, 2022}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{empty}
+    \pagebreak
+    \section{Procedure}
+    We placed a ramp of length \SI{1.2}{\meter} at a \SI{5}{\degree} incline, we rolled down three objects: a cart, disk, and ring. We tracked the time it took for each object to reach the bottom of the ramp.
+    \section{Data and Analysis}
+    To calculate the acceleraton of each object, we used $a = \df{2d}{t^2}$. \\
+    \\
+    To calculate the moment of inertia of each object, we used the following formulas:
+    \begin{itemize}
+        \item $I = mr^2$ for a ring
+        \item $I = \df{1}{2}mr^2$ for a disk
+    \end{itemize}
+    From our set up, $d$ = \SI{1.2}{\meter} and $\theta$ = \SI{5}{\degree}.
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{c|c|c|c|c|c}
+            Object & Mass (\SI{}{\kilogram}) & Radius (\SI{}{\meter}) & Time (\SI{}{\second}) & Acceleration (\SI{}{\meter/\second^2}) & Moment of Inertia (\SI{}{\kilogram\meter^2})\\
+            \hline
+            Cart & 0.26 & & 1.6 & 0.938 & \\
+            Disk & 0.63 & 0.075 & 1.9 & 0.665 & 0.0018 \\
+            Ring & 0.63 & 0.075 & 2.3 & 0.454 & 0.0035 \\
+        \end{tabular}    
+    \end{figure}
+    \subsection{Theoretical Acceleration}
+    We calculated the theoretical acceleration of each object using the following equation:
+    \begin{align*}
+        \begin{aligned}
+            a_\text{cart} &= g\sin{\theta} \\ &= (9.81)\sin(5^{\circ}) \\
+            &\approx \SI{0.855}{\meter/\second^2} \\
+            \\
+            \\
+        \end{aligned} \quad
+        \begin{aligned}
+            a_\text{disk} &= \frac{mgr^2\sin\theta}{mr^2 + \frac{1}{2}mr^2} \\
+            &= \frac{2g\sin\theta}{3} \\
+            &= \frac{2(9.81)\sin(5^{\circ})}{3} \\
+            &\approx \SI{0.570}{\meter/\second^2}    
+        \end{aligned} \quad
+        \begin{aligned}
+            a_\text{ring} &= \frac{mgr^2\sin\theta}{mr^2 + mr^2} \\
+            &= \frac{g\sin\theta}{2} \\
+            &= \frac{(9.81)\sin(5^{\circ})}{2} \\
+            &\approx \SI{0.427}{\meter/\second^2}    
+        \end{aligned}
+    \end{align*}
+    \subsection{Percent Error}
+    We can calculate the percent error of each object by using the following equation:
+    \begin{equation*}
+        \delta = \frac{a_A - a_T}{a_T} \times 100\%
+    \end{equation*}
+    where $a_A$ is the recorded acceleration and $a_T$ is the theoretical acceleration. \\
+    \\
+    The percent error for each object is:
+    \begin{itemize}
+        \item Cart: 9.7\%
+        \item Disk: 16.6\%
+        \item Ring: 6.3\%
+    \end{itemize}
+\end{document}
