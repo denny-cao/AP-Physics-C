@@ -1,0 +1,353 @@
+%++++++++++++++++++++++++++++++++++++++++
+\documentclass[article, 12pt]{article}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{tabu} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{tikz}
+\usepackage{caption} 
+\usepackage{fancyhdr}
+\usepackage{amssymb} % symbols like /therefore
+\usepackage{amsthm} % proofs
+\usepackage{enumerate} % lettered lists
+\usepackage{mathtools} % macros
+\usetikzlibrary{scopes}
+% \usepackage{xcolor} \pagecolor[rgb]{0.12549019607,0.1294117647,0.13725490196} \color[rgb]{0.82352941176,0.76862745098,0.62745098039} % dark theme
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{tikz,pgfplots}
+\usepackage[outline]{contour} % glow around text
+\usetikzlibrary{calc}
+\usetikzlibrary{angles,quotes} % for pic
+\usetikzlibrary{arrows.meta}
+\tikzset{>=latex} % for LaTeX arrow head
+\contourlength{1.2pt}
+
+\colorlet{xcol}{blue!70!black}
+\colorlet{vcol}{green!60!black}
+\colorlet{myred}{red!70!black}
+\colorlet{myblue}{blue!70!black}
+\colorlet{mygreen}{green!70!black}
+\colorlet{mydarkred}{myred!70!black}
+\colorlet{mydarkblue}{myblue!60!black}
+\colorlet{mydarkgreen}{mygreen!60!black}
+\colorlet{acol}{red!50!blue!80!black!80}
+\tikzstyle{CM}=[red!40!black,fill=red!80!black!80]
+\tikzstyle{xline}=[xcol,thick,smooth]
+\tikzstyle{mass}=[line width=0.6,red!30!black,fill=red!40!black!10,rounded corners=1,
+                  top color=red!40!black!20,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{faded mass}=[dashed,line width=0.1,red!30!black!40,fill=red!40!black!10,rounded corners=1,
+                        top color=red!40!black!10,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{rope}=[brown!70!black,very thick,line cap=round]
+\def\rope#1{ \draw[black,line width=1.4] #1; \draw[rope,line width=1.1] #1; }
+\tikzstyle{force}=[->,myred,very thick,line cap=round]
+\tikzstyle{velocity}=[->,vcol,very thick,line cap=round]
+\tikzstyle{Fproj}=[force,myred!40]
+\tikzstyle{myarr}=[-{Latex[length=3,width=2]},thin]
+\def\tick#1#2{\draw[thick] (#1)++(#2:0.12) --++ (#2-180:0.24)}
+\DeclareMathOperator{\sn}{sn}
+\DeclareMathOperator{\cn}{cn}
+\DeclareMathOperator{\dn}{dn}
+\def\N{80} % number of samples in plots
+
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+\usepackage{siunitx} % units
+\usepackage{verbatim} 
+\newcommand{\labTitle}{Solid Pendulum}
+\newcommand{\class}{AP Physics C}
+\newcommand{\professor}{Mr. Perkins}
+\newcommand{\name}{Denny Cao}
+\pagestyle{fancy}
+\fancyhf{}% clears all header and footer fields
+\fancyfoot[C]{--~\thepage~--}
+\renewcommand*{\headrulewidth}{0.4pt}
+\renewcommand*{\footrulewidth}{0pt}
+\lhead{\name}
+\chead{\class: \labTitle}
+\rhead{\professor}
+
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% clears all header and footer fields
+  \fancyfoot[C]{--~\thepage~--}%
+  \renewcommand*{\headrulewidth}{0pt}%
+  \renewcommand*{\footrulewidth}{0pt}%
+}
+
+% Shortcuts
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil} % ceil function
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % floor function
+
+\DeclarePairedDelimiter\paren{(}{)} % parenthesis
+
+\newcommand{\df}{\displaystyle\frac} % displaystyle fraction
+\newcommand{\qeq}{\overset{?}{=}} % questionable equality
+
+\newcommand{\Mod}[1]{\;\mathrm{mod}\; #1} % modulo operator
+
+% Sets
+\DeclarePairedDelimiter\set{\{}{\}}
+\newcommand{\unite}{\cup}
+\newcommand{\inter}{\cap}
+
+\newcommand{\reals}{\mathbb{R}} % real numbers: textbook is Z^+ and 0
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\rats}{\mathbb{Q}}
+
+\newcommand{\degree}{^\circ}
+
+% Counting
+\newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength\parindent{0pt}
+
+% Sign Charts
+\newdimen\tcolw \tcolw=2.5em % the column width
+\edef\ecatcode{\catcode`&=\the\catcode`&\relax}\catcode`&=4
+\def\sgchart#1#2{\vbox{\offinterlineskip\halign{\hfil##\quad&##\hfil\crcr\sgchartA#2,:,%
+   \omit\sgchartR&\kern.2pt\sgchartS{.5\tcolw}\relax\sgchartE#1,\relax,%
+   \sgchartS{.5\tcolw}\relax\cr
+   \noalign{\kern2pt}&\def~{}\kern.5\tcolw\sgchartD#1,\relax,\cr}}}
+\def\sgchartA#1:#2,{\cr\ifx,#1,\else $#1$&\sgchartB#2{}\expandafter\sgchartA\fi}
+\def\sgchartB#1{\hbox to\tcolw{\hss$#1$\hss}\sgchartC}
+\def\sgchartC#1{\ifx,#1,\else
+   \strut\vrule\kern-.4pt\hbox to\tcolw{\hss$#1$\hss}\expandafter\sgchartC\fi}
+\def\sgchartD#1#2,{\ifx\relax#1\else\hbox to\tcolw{\hss$#1#2$\hss}\expandafter\sgchartD\fi}
+\def\sgchartE#1#2,{\ifx\relax#1\else
+    \ifx~#1\sgchartS\tcolw\circ \else\sgchartS\tcolw\bullet\fi \expandafter\sgchartE\fi}
+\def\sgchartR{\leaders\vrule height2.8pt depth-2.4pt\hfil}
+\def\sgchartS#1#2{\hbox to#1{\kern-.2pt\sgchartR \ifx\relax#2\else
+   \kern-.7pt$#2$\kern-.7pt\sgchartR\fi\kern-.2pt}}
+\ecatcode
+%++++++++++++++++++++++++++++++++++++++++
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\labTitle}}
+    \normalsize\vspace{0.1in}\\
+    \vspace{0.1in}\large{\text{\class: \professor}}
+    \vspace{3in}
+}
+
+\author{\name}
+\date{December 21, 2022}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{empty}
+    \pagebreak
+    \section*{Introduction}
+    The goal of this lab is to be able to use concepts of torque, simple harmonic motion (SMH), and moment of inertia to completely describe the motion of a solid body that pivots at some arbitrary point.
+    \section{Case 1: The Pendulum Bob (Concentrated Mass)}
+    \subsection{Procedure}
+    We determined the variables that affect the period of a pendulum bob by suspending a 100 gram mass from a string. We tested two variables: angle and radius (length of the string). With each trial, we timed 10 oscillations to determine the period.
+    \subsection{Data}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Angle (\SI{}{\degree})} & \textbf{Time of 10 Swings (\SI{}{\second})} & \textbf{Period (\SI{}{\second})} \\
+            \hline
+            5  & 15.32 & 1.532 \\
+            30 & 15.49 & 1.549 \\
+            45 & 15.77 & 1.577 \\
+            \hline
+        \end{tabular}
+        \caption{Period of 0.63m string at various angles}
+        \label{tab:angle}
+    \end{table}
+    From \autoref{tab:angle}, since there is a relatively small difference in period, we can conclude that the period of a pendulum bob is independent of the angle of the string from the vertical. \\
+    \\
+    We then tested the effect of the length of the string on the period of the pendulum bob. From our previously conclusion, we can assume that the period is independent of the angle of the string from the vertical. \\
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Length of String} (\SI{}{\meter}) & \textbf{Time of 10 Swings} (\SI{}{\second}) & \textbf{Period} ($\text{s}/\text{cycle}$) \\
+            \hline
+            0.63 & 15.63 & 1.563 \\
+            0.48 & 14.05 & 1.405 \\
+            0.30 & 10.97 & 1.097 \\
+            0.18 & 8.29  & 0.829 \\
+            0.05 & 4.42  & 0.442 \\ 
+            \hline
+        \end{tabular}
+        \caption{Observed Period of Pendulum for Different Lengths of String}
+        \label{tab:observedPeriod}
+    \end{table}
+    \subsection{Analysis}
+    \begin{enumerate}[1)]
+        \item \textbf{Does the amplitude influence the period?  Does a 1 degree amplitude give a smaller period than a 10 degree amplitude?  What if the angle is greater than 15 degrees?}
+
+        By changing the angle, we thereby change the amplitude. From \autoref{tab:angle}, the mean period for a string of length 0.63 meters is:
+        \begin{equation}
+            \mu = \frac{1.532 + 1.549 + 1.577}{3} \approx 1.5527 \text{ seconds}
+            \label{eq:mean}
+        \end{equation}
+    We can then calculate the standard deviation of the period:
+    \begin{equation}
+        \sigma = \sqrt{\frac{1}{3}\sum_{i=1}^{3}(x_i - \mu)^2} \approx 0.0186 \text{ seconds}
+        \label{eq:std}
+    \end{equation}
+    Since the standard deviation is less than 0.02 seconds, we can conclude that the period of a pendulum bob is independent of the amplitude of the pendulum bob. The variance is most likely attributed to the fact that we manually timed the period of the pendulum bob. \\
+    \item \textbf{Draw an FBD for the pendulum at some point in the swing.  Show the restoring force.}
+    \begin{figure}[H]
+        \centering
+    % PENDULUM
+    \def\L{4}  % string length
+    \def\ang{30} % angle string
+    \def\R{0.25} % ball radius
+    \def\F{1.0}  % force magnitude
+    \begin{tikzpicture}
+    \coordinate (M) at (\ang-90:\L);
+    \coordinate (M') at (0,-\L);
+    \coordinate (O) at (0,0);
+    \coordinate (B) at (0,-\L-2.2*\R);
+    \coordinate (FT) at ($(M)+(90+\ang:{\F*cos(\ang)+\R})$);
+    \coordinate (FG) at ($(M)+(-90:{\F+\R})$);
+    \coordinate (FGx) at ($(M)+(-90+\ang:{0.55*\F+\R})$);
+    \coordinate (MA) at ($(M)+(180+\ang:{\F*sin(\ang)+\R})$);
+    %\draw[faded mass] (M') circle(\R);
+    \draw[dashed] (O) -- (B);
+    %\draw[dashed,myred!60!black] (MA) -- (FG);
+    \draw[dashed,myred!60!black] (M) -- (FGx);
+    \draw[dashed] (-90+\ang+10:\L) arc(-90+\ang+10:-110:\L) (B);
+    \rope{(O) -- (M)} \path (O) -- (M) node[midway,above right=-1] {$L$};
+    \fill[black] (O) circle(0.04);
+    \draw[force] (M) -- (FT) node[midway,left=0] {$\vb{T}$};
+    \draw[force] (M) -- (FG) node[right=0] {$\vb{mg}$};
+    \draw[dashed,force,acol] (M) -- (MA) node[left=10,below=0] {$-mg\sin{\theta}$}; %{\contour{white}{$m\vb{a}$}};
+    \draw[mass] (M) circle(\R) node {$m$};
+    \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=22,angle eccentricity=1.30] {angle=B--O--M}; %_\text{max}
+    \draw pic[myarr,"$\theta$",xcol,draw=xcol,angle radius=14,angle eccentricity=1.45] {angle=FG--M--FGx};
+    \end{tikzpicture}
+        \caption{Free Body Diagram of Pendulum}
+        \label{fig:FBD}
+    \end{figure}
+    The restoring force in \autoref{fig:FBD} is $mg\sin{\theta}$.
+    \item \textbf{Set up a differential equation from Newton's second law that, when solved, allows you to calculate the frequency of the pendulum.} \label{q:diffRotation} \\
+    \begin{align}
+        \sum \tau &= I\alpha \nonumber \\
+        \sum \tau &= r \times F \nonumber \\
+        rF\sin{\theta} &= I\alpha
+        \label{eq:torqueEquality}
+    \end{align}
+    Using \autoref{eq:torqueEquality}, we substitute $r$ with $L$, $F$ with $mg$, and $I$ with $mL^2$. We rewrite $\alpha$ as $\ddot{\theta}$:
+    \begin{align}
+        -Lmg\sin{\theta} &= mL^2\ddot{\theta} \nonumber \\
+        -g\sin{\theta} &= L\ddot{\theta}
+    \end{align}
+    With small angle approximation, we can approximate $\sin{\theta} \approx \theta$:
+    \begin{equation}
+        -g\theta = L\ddot{\theta}
+        \label{eq:torqueSmallAngleApprox}
+    \end{equation}
+    We can rewrite $\theta$ as a function of time:
+    \begin{equation}
+        \theta = A\cos{\omega t}
+        \label{eq:theta}
+    \end{equation}
+    where $A$ is the amplitude of the pendulum bob.
+    
+    The double derivative of $\theta$ is:
+    \begin{equation}
+        \ddot{\theta} = -A\omega^2\cos{\omega t}
+        \label{eq:ddotTheta}
+    \end{equation}
+    We substitute these two functions into \autoref{eq:torqueSmallAngleApprox}:
+    \begin{align}
+        -gA\cos{\omega t} &= L\paren*{A\omega^2\cos{\omega t}} \nonumber \\
+        \omega^2 &= \frac{g}{L} \nonumber \\
+        \omega &= \sqrt{\frac{g}{L}}
+        \label{eq:omega}
+    \end{align}
+    $\omega$ is the angular frequency of the pendulum.
+    \item     
+    $\omega$ is the angular frequency of the pendulum, and is defined as:
+    \begin{equation}
+        \omega = \frac{2\pi}{T}
+    \end{equation}
+    where $T$ is the period of the pendulum. Substituting this into \autoref{eq:omega}, we can solve for $T$:
+    \begin{align}
+        \frac{2\pi}{T} &= \sqrt{\frac{g}{L}} \nonumber \\
+        T &= 2\pi \sqrt{\frac{L}{g}}
+        \label{eq:period}
+    \end{align}
+    We can use this to calculate the period of the pendulum for different lengths of the string:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Length of String} (\SI{}{\meter}) & \textbf{Expected Period} ($\text{s}/\text{cycle}$) \\
+            \hline
+            0.63 & 1.593 \\
+            0.48 & 1.391 \\
+            0.30 & 1.099 \\
+            0.18 & 0.852 \\
+            \hline
+        \end{tabular}
+        \caption{Expected Period of Pendulum for Different Lengths of String}
+        \label{tab:expectedPeriod}
+    \end{table}
+    \item Small angle approximation is used to approximate $\sin{\theta} \approx \theta$ for small angles $\theta$. It is a first order Taylor series approximation of $\sin{\theta}$.
+    \item \textbf{\hyperref[q:diffRotation]{Question 3} can be solved from the standpoint of classic linear physics or with rotational physics.  Show both solutions.}
+    
+    We use Newton's second law of linear motion to solve for the period of the pendulum:
+    \begin{align}
+        \sum F = ma \nonumber \\
+        -mg\sin{\theta} = ma \nonumber \\
+        -g\sin{\theta} = a
+        \label{eq:forceEquality}
+    \end{align}
+    We again apply small angle approximation to approximate $\sin{\theta} \approx \theta$:
+    \begin{equation}
+        -g\theta = a
+        \label{eq:forceSmallAngleApprox}
+    \end{equation}
+    We can use \autoref{eq:theta} to rewrite $\theta$ as a function of time and use \autoref{eq:ddotTheta} to rewrite $a$ as a function of time:
+    \begin{align}
+        -gA\cos{\omega t} &= A\omega^2\cos{\omega t} \nonumber \\
+        \omega^2 &= \frac{g}{L} \nonumber \\
+        \omega &= \sqrt{\frac{g}{L}}
+        \label{eq:forceTheta}
+    \end{align}
+\end{enumerate}
+\subsection{Conclusion}
+We conclude that amplitude does not affect the period while the length of the string does. From the lab, we were able to get a theoretical period as a function of the length of the string. We can measure the percent error of the observed period from the theoretical period: 
+\begin{table}[H]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Length of String} (\SI{}{\meter}) & \textbf{Observed Period} ($\text{s}/\text{cycle}$) & \textbf{Expected Period} ($\text{s}/\text{cycle}$) & \textbf{Percent Error} (\%)\\
+        \hline
+        0.63 & 1.563 & 1.593 & 1.883 \\
+        0.48 & 1.405 & 1.391 & 1.006 \\
+        0.30 & 1.097 & 1.099 & 0.182 \\
+        0.18 & 0.829 & 0.852 & 2.700 \\
+        \hline
+    \end{tabular}}
+    \caption{Percent Error of Observed Period from Expected Period}
+    \label{tab:percentError}
+\end{table}
+The percent error is less than 3\% for all lengths of the string. This is a good result because it shows that the theoretical period is a good approximation of the observed period. The error could be caused due to air resistance, friction, and other factors that were not accounted for in the theoretical model. However, these factors are relatively small compared to the errors caused by manually timing the swings to calculate the observed period.
+\section{Case 2: Solid Pendulum}
+\subsection{Procedure}
+
+
+\end{document}
