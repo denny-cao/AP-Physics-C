@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Background}{3}{section.1}%
+\contentsline {section}{\numberline {2}One-Dimensional Kinematics}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Instantaneous Velocity}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Instantaneous Speed}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Instantaneous Acceleration}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Average Velocity}{3}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Average Speed}{4}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Graphical Interpretations:}{4}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Uniformly Accelerated Motion}{4}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}Position Without Reference to Time}{4}{subsubsection.2.7.1}%
+\contentsline {section}{\numberline {3}Two-Dimensional Kinematics}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Position Vector}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Instantaneous Velocity}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Instantaneous Speed}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Instantaneous Acceleration}{5}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Displacement Vector}{6}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Average Velocity}{6}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Projectile Motion}{6}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Horizontal Motion}{6}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Vertical Motion}{6}{subsubsection.3.7.2}%
