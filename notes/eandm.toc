@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Electric Field}{3}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Maxwell: Field Thinking}{3}{subsubsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.2}Coulomb}{3}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}What Actually is a Coulomb?}{3}{subsubsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.3}Capacitor}{4}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Strength of Electric Field}{4}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Difficulty of Coulomb's Law}{4}{subsubsection.1.4.1}%
