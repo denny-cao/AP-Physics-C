@@ -17,6 +17,8 @@
 \usepackage{mathtools} % macros
 \usepackage{hyperref} % hyperlinks
 \usetikzlibrary{scopes}
+\usetikzlibrary{angles, arrows.meta,   
+                quotes} 
 % \usepackage{xcolor} \pagecolor[rgb]{0.12549019607,0.1294117647,0.13725490196} \color[rgb]{0.82352941176,0.76862745098,0.62745098039} % dark theme
 \theoremstyle{definition}
 \newtheorem{example}{Example}[section]
@@ -307,4 +309,108 @@ Kinematics work \textbf{only when acceleration is constant}. Take derivatives an
         y(t) &= \frac{1}{2}a_yt^2 + v_{y_0}t + y_0 \\
         v_y^2 &= v_{y_0}^2 - 2g(y - y_0)
     \end{align}
+    \subsection{Relative Position, Velocity, and Acceleration}
+    Vector addition relates the position of an object relative to two different frames of reference:
+    \begin{equation}
+        \vec{r}_{\text{P relative to B}} = \vec{r}_{\text{P relative to A}} + \vec{r}_{\text{A relative to B}}
+    \end{equation}
+    We take the derivatives of the position vectors to find the relative velocity vectors:
+    \begin{equation}
+        \vec{v}_{\text{P relative to B}} = \vec{v}_{\text{P relative to A}} + \vec{v}_{\text{A relative to B}}
+    \end{equation}
+    We take the second derivatives of the position vectors to find the relative acceleration vectors:
+    \begin{equation}
+        \vec{a}_{\text{P relative to B}} = \vec{a}_{\text{P relative to A}} + \vec{a}_{\text{A relative to B}}
+    \end{equation}
+    \subsubsection{Inertial Reference Frames}
+    Two reference frames that move with a constant velocity with respect to each other. Thus, the acceleration is the same in both inertial reference frames:
+    \begin{equation}
+        \vec{a}_{PB} = \vec{a}_{PA}
+    \end{equation}
+    \subsection{Uniform Circular Motion}
+    It is useful to divide the acceleration vector into two components: a component parallel to the velocity vector and a component perpendicular to the velocity vector:
+    \begin{itemize}
+        \item $a_\parallel$ (the \textbf{tangential acceleration}) affects only the \textbf{magnitude} of the velocity vector (speed). Mathematically:
+        \begin{equation}
+            a_\parallel = \frac{dv}{dt}
+        \end{equation}
+        \item $a_\perp$ (the \textbf{radial acceleration}) affects only the \textbf{direction} of the velocity vector.
+    \end{itemize}
+    We can classify special types of motion using these two components:
+    \begin{itemize}
+        \item $a_\perp(t) = 0 \land a_\parallel(t) \neq 0$: The direction of the motion never changes: The path of the particle lies along a line (rectilinear motion), but its speed changes.
+        \item $a_\parallel(t) = 0 \land a_\perp(t) \neq 0$: The speed is constant and only the direction changes. A special case of this is uniform circular motion (UCM), which occurs when $a_\perp(t) = \text{constant}$. \textbf{Note that there is still acceleration in UCM, as direction changes!}
+        \item $a_\perp(t) \neq 0 \land a_\parallel(t) \neq 0$: The most general situation corresponds to more complicated motions such as projectile motion or nonuniform circular motion. 
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=2]
+
+            % draw the circle
+            \draw[dashed] (0,0) circle (1);
+            
+            % draw the point on the circle
+            \filldraw[black] ({cos(60)},{sin(60)}) circle (.5pt);
+            
+            % draw the vector
+            \draw[->] (0,0) -- ({cos(60)},{sin(60)}) node[midway,above,sloped] {$\vec{r}$};
+            
+            % draw dashed line from point to x axis
+            \draw[dashed] ({cos(60)},{sin(60)}) -- ({cos(60)},0);
+            
+            %label component r*sin(theta)
+            \node[right] at ({cos(60)}, {sin(60)/2}) {$r\sin\theta$};
+            
+            % draw line from center to x coordinate of point
+            \draw[->] (0,0) -- ({cos(60)},0);
+            
+            %label component r*cos(theta)
+            \node[below] at ({cos(60)/2}, 0) {$r\cos\theta$};
+            
+            % draw arc for angle from horizontal component to vector
+            \draw[-] ({cos(60)/3},0) arc (0:60:{cos(60)/3}) node[midway] {$\theta$};
+            \end{tikzpicture}
+    \end{figure}
+    We can express the position vector in terms of the angle $\theta$:
+    \begin{equation}
+        \vec{r} = \begin{pmatrix} r\cos\theta \\ r\sin\theta \end{pmatrix}
+    \end{equation}
+    To express this position equation in terms of time for an object moving at constant speed, we make the substitution $\theta = \omega t + \theta_0$:
+    \begin{equation}
+        \vec{r} = \begin{pmatrix} r\cos(\omega t + \theta_0) \\ r\sin(\omega t + \theta_0) \end{pmatrix}
+    \end{equation}
+    Because the motion is uniform, the angle $\theta$ changes at a constant rate given by $\omega$ (the \textbf{angular velocity}) according to the equation $\omega = \frac{d\theta}{dt}$. $\theta_0$ is the initial angle of the object.
+    \\
+    \\
+    We can differentiate the position vector to find the velocity vector:
+    \begin{equation}
+        \vec{v} = \omega r \begin{pmatrix} -\sin(\omega t + \theta_0) \\ \cos(\omega t + \theta_0) \end{pmatrix}
+    \end{equation}
+    \textbf{Direction of the Velocity Vector}: We can take the dot product of the velocity vector with the position vector to find the direction of the velocity vector:
+    \begin{equation}
+        \vec{r} \cdot \vec{v} = r_x v_x + r_y v_y = 0
+    \end{equation}
+    This indicates that the velocity vector is perpendicular to the position vector, which is what we expect, as the velocity is always tangent to the path of the particle, which in this case is tangent to the circle and thus perpendicular to the position vector.
+    \\
+    \\
+    \textbf{Magnitude of the Velocity Vector}: 
+    \begin{equation}
+        ||\vec{v}|| = \sqrt{v_x^2 + v_y^2} = \omega r
+        \label{eq:angular_velocity}
+    \end{equation}
+    We can differentiate the velocity vector to find the acceleration vector:
+    \begin{equation}
+        \vec{a} = -\omega^2 r \begin{pmatrix} \cos(\omega t + \theta_0) \\ \sin(\omega t + \theta_0) \end{pmatrix}
+    \end{equation}
+    \textbf{Direction of the Acceleration Vector}: From inspection, we see that $\vec{a}(t) = -\omega^2 \vec{r}(t)$. Because $\omega^2$ is positive, this equation implies that the acceleration vector is antiparallel to the position vector. Because the position vector points outward, the acceleration vector points inward, toward the center of rotation. This is why the acceleration is called \textbf{centripetal acceleration}.
+    \\
+    \\
+    \textbf{Magnitude of the Acceleration Vector}:
+    \begin{equation}
+        ||\vec{a}|| = \sqrt{a_x^2 + a_y^2} = \omega^2 r
+    \end{equation}
+    Using \autoref{eq:angular_velocity}, we can write:
+    \begin{equation}
+        ||\vec{a}|| = \frac{v^2}{r}
+    \end{equation}
 \end{document}

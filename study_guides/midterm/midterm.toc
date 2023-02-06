@@ -18,3 +18,6 @@
 \contentsline {subsection}{\numberline {3.7}Projectile Motion}{6}{subsection.3.7}%
 \contentsline {subsubsection}{\numberline {3.7.1}Horizontal Motion}{6}{subsubsection.3.7.1}%
 \contentsline {subsubsection}{\numberline {3.7.2}Vertical Motion}{6}{subsubsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.8}Relative Position, Velocity, and Acceleration}{7}{subsection.3.8}%
+\contentsline {subsubsection}{\numberline {3.8.1}Inertial Reference Frames}{7}{subsubsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.9}Uniform Circular Motion}{7}{subsection.3.9}%

@@ -1,0 +1,250 @@
+%++++++++++++++++++++++++++++++++++++++++
+\documentclass[article, 12pt]{article}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{tabu} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{tikz}
+\usepackage{caption} 
+\usepackage{fancyhdr}
+\usepackage{amssymb} % symbols like /therefore
+\usepackage{amsthm} % proofs
+\usepackage{enumerate} % lettered lists
+\usepackage{mathtools} % macros
+\usepackage{multirow} % multirow tables
+\usetikzlibrary{scopes}
+% \usepackage{xcolor} \pagecolor[rgb]{0.12549019607,0.1294117647,0.13725490196} \color[rgb]{0.82352941176,0.76862745098,0.62745098039} % dark theme
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{tikz,pgfplots}
+\usepackage[outline]{contour} % glow around text
+\usetikzlibrary{calc}
+\usetikzlibrary{angles,quotes} % for pic
+\usetikzlibrary{arrows.meta}
+\tikzset{>=latex} % for LaTeX arrow head
+\contourlength{1.2pt}
+
+\colorlet{xcol}{blue!70!black}
+\colorlet{vcol}{green!60!black}
+\colorlet{myred}{red!70!black}
+\colorlet{myblue}{blue!70!black}
+\colorlet{mygreen}{green!70!black}
+\colorlet{mydarkred}{myred!70!black}
+\colorlet{mydarkblue}{myblue!60!black}
+\colorlet{mydarkgreen}{mygreen!60!black}
+\colorlet{acol}{red!50!blue!80!black!80}
+\tikzstyle{CM}=[red!40!black,fill=red!80!black!80]
+\tikzstyle{xline}=[xcol,thick,smooth]
+\tikzstyle{mass}=[line width=0.6,red!30!black,fill=red!40!black!10,rounded corners=1,
+                  top color=red!40!black!20,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{faded mass}=[dashed,line width=0.1,red!30!black!40,fill=red!40!black!10,rounded corners=1,
+                        top color=red!40!black!10,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{rope}=[brown!70!black,very thick,line cap=round]
+\def\rope#1{ \draw[black,line width=1.4] #1; \draw[rope,line width=1.1] #1; }
+\tikzstyle{force}=[->,myred,very thick,line cap=round]
+\tikzstyle{velocity}=[->,vcol,very thick,line cap=round]
+\tikzstyle{Fproj}=[force,myred!40]
+\tikzstyle{myarr}=[-{Latex[length=3,width=2]},thin]
+\def\tick#1#2{\draw[thick] (#1)++(#2:0.12) --++ (#2-180:0.24)}
+\DeclareMathOperator{\sn}{sn}
+\DeclareMathOperator{\cn}{cn}
+\DeclareMathOperator{\dn}{dn}
+\def\N{80} % number of samples in plots
+
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+\usepackage{siunitx} % units
+\usepackage{verbatim} 
+\newcommand{\labTitle}{Rotational Momentum}
+\newcommand{\class}{AP Physics C}
+\newcommand{\professor}{Mr. Perkins}
+\newcommand{\name}{Denny Cao}
+\newcommand{\dueDate}{January 11, 2023}
+\pagestyle{fancy}
+\fancyhf{}% clears all header and footer fields
+\fancyfoot[C]{--~\thepage~--}
+\renewcommand*{\headrulewidth}{0.4pt}
+\renewcommand*{\footrulewidth}{0pt}
+\lhead{\name}
+\chead{\class: \labTitle}
+\rhead{\professor}
+
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% clears all header and footer fields
+  \fancyfoot[C]{--~\thepage~--}%
+  \renewcommand*{\headrulewidth}{0pt}%
+  \renewcommand*{\footrulewidth}{0pt}%
+}
+
+% Shortcuts
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil} % ceil function
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % floor function
+
+\DeclarePairedDelimiter\paren{(}{)} % parenthesis
+
+\newcommand{\df}{\displaystyle\frac} % displaystyle fraction
+\newcommand{\qeq}{\overset{?}{=}} % questionable equality
+
+\newcommand{\Mod}[1]{\;\mathrm{mod}\; #1} % modulo operator
+
+% Sets
+\DeclarePairedDelimiter\set{\{}{\}}
+\newcommand{\unite}{\cup}
+\newcommand{\inter}{\cap}
+
+\newcommand{\reals}{\mathbb{R}} % real numbers: textbook is Z^+ and 0
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\rats}{\mathbb{Q}}
+
+\newcommand{\degree}{^\circ}
+\newcommand{\tplint}[6]{\int\limits^{#1}_{#2}\int\limits^{#3}_{#4}\int\limits^{#5}_{#6}} % triple integral bounds
+% Counting
+\newcommand{\dblint}[4]{\int\limits^{#1}_{#2}\int\limits^{#3}_{#4}} % double integral bounds
+\newcommand{\sglint}[2]{\int\limits^{#1}_{#2}} % integral bounds
+\newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength\parindent{0pt}
+
+% Sign Charts
+\newdimen\tcolw \tcolw=2.5em % the column width
+\edef\ecatcode{\catcode`&=\the\catcode`&\relax}\catcode`&=4
+\def\sgchart#1#2{\vbox{\offinterlineskip\halign{\hfil##\quad&##\hfil\crcr\sgchartA#2,:,%
+   \omit\sgchartR&\kern.2pt\sgchartS{.5\tcolw}\relax\sgchartE#1,\relax,%
+   \sgchartS{.5\tcolw}\relax\cr
+   \noalign{\kern2pt}&\def~{}\kern.5\tcolw\sgchartD#1,\relax,\cr}}}
+\def\sgchartA#1:#2,{\cr\ifx,#1,\else $#1$&\sgchartB#2{}\expandafter\sgchartA\fi}
+\def\sgchartB#1{\hbox to\tcolw{\hss$#1$\hss}\sgchartC}
+\def\sgchartC#1{\ifx,#1,\else
+   \strut\vrule\kern-.4pt\hbox to\tcolw{\hss$#1$\hss}\expandafter\sgchartC\fi}
+\def\sgchartD#1#2,{\ifx\relax#1\else\hbox to\tcolw{\hss$#1#2$\hss}\expandafter\sgchartD\fi}
+\def\sgchartE#1#2,{\ifx\relax#1\else
+    \ifx~#1\sgchartS\tcolw\circ \else\sgchartS\tcolw\bullet\fi \expandafter\sgchartE\fi}
+\def\sgchartR{\leaders\vrule height2.8pt depth-2.4pt\hfil}
+\def\sgchartS#1#2{\hbox to#1{\kern-.2pt\sgchartR \ifx\relax#2\else
+   \kern-.7pt$#2$\kern-.7pt\sgchartR\fi\kern-.2pt}}
+\ecatcode
+%++++++++++++++++++++++++++++++++++++++++
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\labTitle}}
+    \normalsize\vspace{0.1in}\\
+    \vspace{0.1in}\large{\text{\class: \professor}}
+    \vspace{3in}
+}
+
+\author{\name}
+\date{Due: \dueDate}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{empty}
+    \pagebreak
+    \section{Introduction}
+    \section{Data}
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \textbf{Measurement} & \textbf{Variable} & \textbf{Value} \\
+                \hline
+                Moment of Inertia of Windmill & $I$ & \SI{0.10066}{\kilogram\meter^2} \\
+                Mass of Car 1 & $m_1$ & \SI{0.284}{\kilogram} \\
+                Mass of Car 2 & $m_2$ & \SI{0.534}{\kilogram} \\
+                Distance Traveled & $d$ & \SI{0.5}{\meter} \\
+                Radius of Windmill & $r$ & \SI{0.325}{\meter} \\
+                \hline
+            \end{tabular}
+            \caption{Measured Constants}
+            \label{tab:constants}
+        \end{table}
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \multicolumn{3}{|c|}{\textbf{Mass of Car (kg): 0.284}} \\
+                \hline
+                \textbf{Trial} & \textbf{Time from Release to Impact (s)} & \textbf{Period (s/rev)} \\
+                \hline
+                1 & 0.68 & 12.99 \\
+                2 & 0.81 & 11.74 \\
+                3 & 0.81 & 12.16 \\
+                \hline
+                \textbf{Average} & 0.767 & 12.297 \\
+                \hline
+            \end{tabular}
+            \caption{Car 1 Data}
+            \label{tab:car1} 
+        \end{table}
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \multicolumn{3}{|c|}{\textbf{Mass of Car (kg): 0.534}} \\
+                \hline
+                \textbf{Trial} & \textbf{Time from Release to Impact (s)} & \textbf{Period (s/rev)} \\
+                \hline
+                1 & 1.01 & 9.51 \\
+                2 & 1.01 & 9.43 \\
+                3 & 1.03 & 8.26 \\
+                \hline
+                \textbf{Average} & 1.017 & 9.067 \\
+                \hline
+            \end{tabular}
+            \caption{Car 2 Data}\label{tab:car2} 
+        \end{table}
+    \section{Analysis}
+    Let variables with subscript 1 denote the first car and variables with subscript 2 denote the second car.
+    \subsection{Observational Windmill Speed}
+    The rotational speed of the windmill, $\omega$, is given by:
+    \begin{align}
+        \omega_1 = \frac{2\pi}{T} = \frac{2\pi}{12.297} = \text{\SI{0.511}{\frac{\radian}{\second}}} && \omega_2 = \frac{2\pi}{9.067} = \text{\SI{0.693}{\frac{\radian}{\second}}}\label{eq:windmillSpeedObservational}
+    \end{align}
+    \subsection{Theoretical Windmill Speed}
+    We assume the car is moving on a frictionless surface. Therefore, the acceleration is constant meaning the velocity is given by:
+    \begin{align}
+        v_1 = \frac{\Delta d}{\Delta t} = \frac{0.5}{0.767} = \text{\SI{0.652}{\frac{\meter}{\second}}} && v_2 = \frac{\Delta d}{\Delta t} = \frac{0.5}{1.017} = \text{\SI{0.492}{\frac{\meter}{\second}}}\label{eq:carVelocity}
+    \end{align}
+    The linear momentum of the car is given by:
+    \begin{align}
+        p_1 = m_1 v_1 = 0.284(0.652) = \text{\SI{0.185}{\newton\second}} && p_2 = m_2 v_2 = 0.534(0.492) = \text{\SI{0.263}{\newton\second}}\label{eq:carMomentum}
+    \end{align}
+    The angle the car makes with the horizontal is $\theta = 90^\circ$. The angular momentum of the car is given by:
+    \begin{align}
+        L_1 &= p_1 r \sin \theta = 0.185(0.325) = \text{\SI{0.060}{\newton\meter\second}} \nonumber\\
+        L_2 &= p_2 r \sin \theta = 0.263(0.325) = \text{\SI{0.085}{\newton\meter\second}}\label{eq:carAngularMomentum}
+    \end{align}
+    We assume that momentum is conserved in the system. Thus, after impact and coming to a complete stop, the momentum from the car is transferred to the windmill:
+    \begin{equation}
+        L_\text{car} = L_\text{windmill} = I\omega \label{eq:momentumConservation}
+    \end{equation}
+    We can solve for $\omega$:
+    \begin{align}
+        \omega_1 = \frac{L_1}{I} = \frac{0.060}{0.10066} = \text{\SI{0.59606}{\frac{\radian}{\second}}} && \omega_2 = \frac{L_2}{I} = \frac{0.085}{0.10066} = \text{\SI{0.84442}{\frac{\radian}{\second}}}\label{eq:windmillSpeedTheoretical}
+    \end{align}
+    \section{Conclusion}
+    The percent loss of momentum from the car to the windmill is given by:
+    \begin{equation}
+        \delta = \frac{\abs*{L_\text{car} - L_\text{windmill}}}{L_\text{car}} \times 100
+    \end{equation}
+    where $L_\text{windmill}$ is the angular momentum using the observational windmill speed from \autoref{eq:windmillSpeedObservational}.
+    \begin{align}
+        \delta_1 &= \frac{\abs*{L_1 - I\omega_1}}{L_1} \times 100 = \frac{\abs*{0.060 - 0.10066(0.511)}}{0.060} \times 100 = 14.27\% \nonumber\\
+        \delta_2 &= \frac{\abs*{L_2 - I\omega_2}}{L_2} \times 100 = \frac{\abs*{0.085 - 0.10066(0.693)}}{0.085} \times 100 = 17.93\%
+    \end{align}
+\end{document}
