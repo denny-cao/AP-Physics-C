@@ -1,0 +1,465 @@
+%++++++++++++++++++++++++++++++++++++++++
+\documentclass[article, 12pt]{article}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{tabu} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{tikz}
+\usepackage{caption} 
+\usepackage{fancyhdr}
+\usepackage{amssymb} % symbols like /therefore
+\usepackage{amsthm} % proofs
+\usepackage{enumerate} % lettered lists
+\usepackage{mathtools} % macros
+\usepackage{multirow} % multirow tables
+\usepackage{pgfplots} % plots
+\usetikzlibrary{scopes}
+% \usepackage{xcolor} \pagecolor[rgb]{0.12549019607,0.1294117647,0.13725490196} \color[rgb]{0.82352941176,0.76862745098,0.62745098039} % dark theme
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{tikz,pgfplots}
+\usepackage[outline]{contour} % glow around text
+\usetikzlibrary{calc}
+\usetikzlibrary{angles,quotes} % for pic
+\usetikzlibrary{arrows.meta}
+\tikzset{>=latex} % for LaTeX arrow head
+\contourlength{1.2pt}
+
+\colorlet{xcol}{blue!70!black}
+\definecolor{babyblueeyes}{rgb}{0.63, 0.79, 0.95}
+\colorlet{vcol}{green!60!black}
+\colorlet{myred}{red!70!black}
+\colorlet{myblue}{blue!70!black}
+\colorlet{mygreen}{green!70!black}
+\colorlet{mydarkred}{myred!70!black}
+\colorlet{mydarkblue}{myblue!60!black}
+\colorlet{mydarkgreen}{mygreen!60!black}
+\colorlet{acol}{red!50!blue!80!black!80}
+\tikzstyle{CM}=[red!40!black,fill=red!80!black!80]
+\tikzstyle{xline}=[xcol,thick,smooth]
+\tikzstyle{mass}=[line width=0.6,red!30!black,fill=red!40!black!10,rounded corners=1,
+                  top color=red!40!black!20,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{faded mass}=[dashed,line width=0.1,red!30!black!40,fill=red!40!black!10,rounded corners=1,
+                        top color=red!40!black!10,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{rope}=[brown!70!black,very thick,line cap=round]
+\def\rope#1{ \draw[black,line width=1.4] #1; \draw[rope,line width=1.1] #1; }
+\tikzstyle{force}=[->,myred,very thick,line cap=round]
+\tikzstyle{velocity}=[->,vcol,very thick,line cap=round]
+\tikzstyle{Fproj}=[force,myred!40]
+\tikzstyle{myarr}=[-{Latex[length=3,width=2]},thin]
+\def\tick#1#2{\draw[thick] (#1)++(#2:0.12) --++ (#2-180:0.24)}
+\DeclareMathOperator{\sn}{sn}
+\DeclareMathOperator{\cn}{cn}
+\DeclareMathOperator{\dn}{dn}
+\def\N{80} % number of samples in plots
+
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+\usepackage{siunitx} % units
+\usepackage{verbatim} 
+\usepackage[outline]{contour} % glow around text
+
+\newcommand{\labTitle}{Electric Fields Lab}
+\newcommand{\class}{AP Physics C}
+\newcommand{\professor}{Mr. Perkins}
+\newcommand{\name}{Denny Cao}
+\pagestyle{fancy}
+\fancyhf{}% clears all header and footer fields
+\fancyfoot[C]{--~\thepage~--}
+\renewcommand*{\headrulewidth}{0.4pt}
+\renewcommand*{\footrulewidth}{0pt}
+\lhead{\name}
+\chead{\class: \labTitle}
+\rhead{\professor}
+
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% clears all header and footer fields
+  \fancyfoot[C]{--~\thepage~--}%
+  \renewcommand*{\headrulewidth}{0pt}%
+  \renewcommand*{\footrulewidth}{0pt}%
+}
+
+% Shortcuts
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil} % ceil function
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % floor function
+
+\DeclarePairedDelimiter\paren{(}{)} % parenthesis
+
+\newcommand{\df}{\displaystyle\frac} % displaystyle fraction
+\newcommand{\qeq}{\overset{?}{=}} % questionable equality
+
+\newcommand{\Mod}[1]{\;\mathrm{mod}\; #1} % modulo operator
+
+% Sets
+\DeclarePairedDelimiter\set{\{}{\}}
+\newcommand{\unite}{\cup}
+\newcommand{\inter}{\cap}
+
+\newcommand{\reals}{\mathbb{R}} % real numbers: textbook is Z^+ and 0
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\rats}{\mathbb{Q}}
+
+\newcommand{\degree}{^\circ}
+\newcommand{\tplint}[6]{\int\limits^{#1}_{#2}\int\limits^{#3}_{#4}\int\limits^{#5}_{#6}} % triple integral bounds
+% Counting
+\newcommand{\dblint}[4]{\int\limits^{#1}_{#2}\int\limits^{#3}_{#4}} % double integral bounds
+\newcommand{\sglint}[2]{\int\limits^{#1}_{#2}} % integral bounds
+\newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength\parindent{0pt}
+
+% Sign Charts
+\newdimen\tcolw \tcolw=2.5em % the column width
+\edef\ecatcode{\catcode`&=\the\catcode`&\relax}\catcode`&=4
+\def\sgchart#1#2{\vbox{\offinterlineskip\halign{\hfil##\quad&##\hfil\crcr\sgchartA#2,:,%
+   \omit\sgchartR&\kern.2pt\sgchartS{.5\tcolw}\relax\sgchartE#1,\relax,%
+   \sgchartS{.5\tcolw}\relax\cr
+   \noalign{\kern2pt}&\def~{}\kern.5\tcolw\sgchartD#1,\relax,\cr}}}
+\def\sgchartA#1:#2,{\cr\ifx,#1,\else $#1$&\sgchartB#2{}\expandafter\sgchartA\fi}
+\def\sgchartB#1{\hbox to\tcolw{\hss$#1$\hss}\sgchartC}
+\def\sgchartC#1{\ifx,#1,\else
+   \strut\vrule\kern-.4pt\hbox to\tcolw{\hss$#1$\hss}\expandafter\sgchartC\fi}
+\def\sgchartD#1#2,{\ifx\relax#1\else\hbox to\tcolw{\hss$#1#2$\hss}\expandafter\sgchartD\fi}
+\def\sgchartE#1#2,{\ifx\relax#1\else
+    \ifx~#1\sgchartS\tcolw\circ \else\sgchartS\tcolw\bullet\fi \expandafter\sgchartE\fi}
+\def\sgchartR{\leaders\vrule height2.8pt depth-2.4pt\hfil}
+\def\sgchartS#1#2{\hbox to#1{\kern-.2pt\sgchartR \ifx\relax#2\else
+   \kern-.7pt$#2$\kern-.7pt\sgchartR\fi\kern-.2pt}}
+\ecatcode
+%++++++++++++++++++++++++++++++++++++++++
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\labTitle}}
+    \normalsize\vspace{0.1in}\\
+    \vspace{0.1in}\large{\text{\class: \professor}}
+    \vspace{3in}
+}
+
+\author{\name}
+\date{Due: February 15, 2023}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{empty}
+    \pagebreak
+    \section{Introduction}
+    Using a piece of carbon paper, we investigate the behavior of conductors on electric fields. Two aluminum plates are placed on either side to create an electric field using a 9V batter. The 8.5 by 11 carbon paper is placed in between the plates and the voltage is measured using a multimeter. The voltage is measured at different distances from the plates.
+
+    \section{Data}
+    \subsection{Carbon Paper}
+\usetikzlibrary{angles,quotes} % for pic (angle labels)
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+    \colorlet{Ecol}{orange!90!black}
+\colorlet{EcolFL}{orange!80!black}
+\colorlet{veccol}{green!45!black}
+\colorlet{EFcol}{red!60!black}
+\tikzstyle{EcolEP}=[blue!80!white]
+\tikzstyle{charged}=[top color=blue!30,bottom color=blue!50,shading angle=10]
+\tikzstyle{darkcharged}=[very thin,top color=blue!60,bottom color=blue!80,shading angle=10]
+\tikzstyle{charge+}=[very thin,top color=red!50,bottom color=red!90!black,shading angle=20]
+\tikzstyle{charge-}=[very thin,top color=blue!50,bottom color=blue!80,shading angle=20]
+\tikzstyle{gauss surf}=[blue!90!black,top color=blue!2,bottom color=blue!80!black!70,shading angle=5,fill opacity=0.1]
+\tikzstyle{gauss line}=[blue!90!black]
+\tikzstyle{vector}=[->,very thick,veccol]
+\tikzset{EFieldLine/.style={thick,EcolFL,decoration={markings,mark=at position #1 with {\arrow{latex}}},
+                                 postaction={decorate}},
+         EFieldLine/.default=0.5}
+\tikzstyle{measure}=[fill=white,midway,outer sep=2]
+\def\L{8}
+\def\W{0.25}
+\def\N{14}
+% E FIELD horizontal, equipotential
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.6]
+        \def\R{0.2}
+        \def\NE{4}
+        \def\NQ{5}
+        \def\xmax{25}
+        \def\ymax{3.1}
+        \coordinate (P) at ( 0.30*\xmax,0.5*\ymax);
+      
+        % Draw aluminum plates
+        \draw[very thick] (0,0) -- ++ (0,\ymax);
+        \draw[very thick] (\xmax,0) -- ++ (0,\ymax);
+
+        % Draw conductive paper behind 
+        \node[rectangle,fill=babyblueeyes,minimum height=\ymax*0.5 cm, minimum width = \xmax * .6 cm] at (\xmax * .5, \ymax * .5) {};
+        
+          
+        % Create nodes to label charges for each plate
+        \node at (0.05*\xmax -1.5,0.5*\ymax)[left] {$+$};
+        \node at (0.95*\xmax + 1.5,0.5*\ymax)[right] {$-$};
+      
+        % ELECTRIC FIELD
+        \foreach \i [evaluate={\y=(\i-0.75)*\ymax/(\NE-0.5);}] in {1,...,\NE}{
+          \draw[EFieldLine] (0,\y) -- (\xmax,\y);
+        }
+
+        \foreach \i [evaluate={\x=(\i)*\xmax/\NQ;}] in {1,...,4}{
+          \draw[EcolEP,thick] (\x,0) --++ (0,\ymax);
+        }
+
+        % Include distance labels as nodes
+        \foreach [
+            evaluate=\x as \i using \x*\xmax/\NQ,
+            evaluate=\x as \d using \x*5,
+        ] \x in {0,...,\NQ}{
+            \node at (\i,0)[below] {$\d$ cm};
+        }
+        
+        % Include voltage labels as nodes
+        \node at(0,\ymax)[above] {$7.35$ V};
+        \node at(\xmax/\NQ,\ymax)[above] {$6.21$ V};
+        \node at(2 * \xmax/\NQ,\ymax)[above] {$5.07$ V};
+        \node at(3 * \xmax/\NQ,\ymax)[above] {$3.93$ V};
+        \node at(4 * \xmax/\NQ,\ymax)[above] {$2.79$ V};
+        \node at(\xmax,\ymax)[above] {$1.65$ V};
+      \end{tikzpicture}
+      \caption{Equipotential Lines and Electric Field Lines for No Carbon Paper}
+      \label{fig:CarbonPaper}
+    \end{figure}
+
+    % Graph of equipotential/voltage (V) vs distance (cm) using the data from the experiment
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}
+        % Graph points on plot and then linear regression
+        \begin{axis}[
+          axis lines = left,
+          xlabel = \(\text{Distance (cm)}\),
+          ylabel = {\(\text{Voltage (V)}\)},
+          xmin = 0, xmax = 25,
+          ymin = 0, ymax = 8,
+          ]
+          \addplot[mark=*,mark size=1.5,mark options={solid,fill=black},only marks] coordinates {(0,7.35) (5,6.21) (10,5.07) (15,3.93) (20,2.79) (25,1.65)};
+
+          % Linear regression
+          \addplot[myred,thick] coordinates {(0,7.35) (25,1.65)};
+        \end{axis}
+      \end{tikzpicture}
+      \caption{Voltage vs Distance for No Carbon Paper}
+      \label{fig:CarbonPaperGraph}
+    \end{figure}
+
+    \subsection{With Piece of Aluminum}
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.6]
+        \def\R{0.2}
+        \def\NE{4}
+        \def\NQ{5}
+        \def\xmax{25}
+        \def\ymax{3.1}
+        \coordinate (P) at ( 0.30*\xmax,0.5*\ymax);
+      
+        % Draw aluminum plates
+        \draw[very thick] (0,0) -- ++ (0,\ymax);
+        \draw[very thick] (\xmax,0) -- ++ (0,\ymax);
+
+        % Draw conductive paper behind 
+        \node[rectangle,fill=babyblueeyes,minimum height=\ymax*0.5 cm, minimum width = \xmax * .6 cm] at (\xmax * .5, \ymax * .5) {};
+        
+        % Create nodes to label charges for each plate
+        \node at (0.05*\xmax -1.5,0.5*\ymax)[left] {$+$};
+        \node at (0.95*\xmax + 1.5,0.5*\ymax)[right] {$-$};
+      
+        % ELECTRIC FIELD LEFT OF CARBON PAPER
+        \foreach \i [evaluate={\y=(\i-0.75)*\ymax/(\NE-0.5);}] in {1,...,\NE}{
+          \draw[EFieldLine] (0,\y) -- (\xmax * 25/56,\y);
+        }
+
+        \foreach \i [evaluate={\x=(\i)*\xmax * 25/56/\NQ;}] in {1,...,4}{
+          \draw[EcolEP,thick] (\x,0) --++ (0,\ymax);
+        }
+
+        % ELECTRIC FIELD RIGHT OF CARBON PAPER
+        \foreach \i [evaluate={\y=(\i-0.75)*\ymax/(\NE-0.5);}] in {1,...,\NE}{
+          \draw[EFieldLine] (\xmax * 31/56,\y) -- (\xmax,\y);
+        }
+
+        \foreach \i [evaluate={\x=(\i)*\xmax * 25/56/\NQ;}] in {1,...,4}{
+          \draw[EcolEP,thick] (\xmax * 31/56 + \x,0) --++ (0,\ymax);
+        }
+                
+        % Draw carbon paper as a rectangle from 25.0 cm to 31.0 cm
+        \node[rectangle,draw,fill=black!10,minimum width=3 * 0.6 cm,minimum height=\ymax * 0.6 cm] at (12.5, \ymax/2) {};
+
+        % Draw electric field lines for carbon paper
+        \foreach \i [evaluate={\y=(\i-0.75)*\ymax/(\NE-0.5);}] in {1,...,\NE}{
+          \draw[EFieldLine] (\xmax * 25/56,\y) -- (\xmax * 31/56,\y);
+        }
+
+        % Include distance labels as nodes
+        \foreach [
+            evaluate=\x as \i using \x*\xmax/\NQ,
+            evaluate=\x as \d using \x*5,
+        ] \x in {0,...,\NQ}{
+            \node at (\i * 25/56,0)[below] {\footnotesize $\d$ cm};
+        }
+
+        \foreach [
+            evaluate=\x as \i using \x*\xmax/\NQ,
+            evaluate=\x as \d using \x*5 + 31,
+        ] \x in {0,...,\NQ}{
+            \node at (\xmax * 31/56 + \i * 25/56,0)[below] {\footnotesize $\d$ cm};
+        }
+
+        % Include voltage labels as nodes
+        \node at(0,\ymax)[above] {\footnotesize $7.35$ V};
+        \node at(\xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $6.59$ V};
+        \node at(2 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $6.08$ V};
+        \node at(3 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $5.57$ V};
+        \node at(4 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $5.06$ V};
+        \node at(5 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $4.55$ V};
+        
+        \node at(\xmax * 31/56,\ymax)[above] {\footnotesize $4.45$ V};
+        \node at(\xmax * 31/56 + \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $3.94$ V};
+        \node at(\xmax * 31/56 + 2 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $3.43$ V};
+        \node at(\xmax * 31/56 + 3 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $2.92$ V};
+        \node at(\xmax * 31/56 + 4 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $2.41$ V};
+        \node at(\xmax * 31/56 + 5 * \xmax * 25/56/\NQ,\ymax)[above] {\footnotesize $1.90$ V};
+      \end{tikzpicture}
+      \caption{Equipotential Lines and Electric Field Lines for Carbon Paper}
+      \label{fig:AluminumCarbonPaper}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+          axis lines = left,
+          xlabel = \(\text{Distance (cm)}\),
+          ylabel = {\(\text{Voltage (V)}\)},
+          xmin = 0, xmax = 60,
+          ymin = 0, ymax = 8,
+          ]
+          \addplot[mark=*,mark size=1.5,mark options={solid,fill=black},only marks] coordinates {(0,7.35) (5,6.59) (10,6.08) (15,5.57) (20,5.06) (25,4.55) (31,4.45) (36,3.94) (41,3.43) (46,2.92) (51,2.41) (56,1.90)};
+
+          % Linear regression first half
+          \addplot[mark=none,thick,myred] coordinates {(0,7.35) (25,4.55)};
+
+          % Linear regression middle
+          \addplot[mark=none,thick,myred] coordinates {(25,4.55) (31,4.45)};
+
+          % Linear regression second half
+          \addplot[mark=none,thick,myred] coordinates {(31,4.45) (56,1.90)};
+        \end{axis}
+      \end{tikzpicture}
+      \caption{Voltage vs Distance for Carbon Paper}
+      \label{fig:AluminumCarbonPaperGraph}
+    \end{figure}
+
+    \section{No Conductive Paper}
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.6]
+        \def\R{0.2}
+        \def\NE{4}
+        \def\NQ{5}
+        \def\xmax{25}
+        \def\ymax{3.1}
+        \coordinate (P) at ( 0.30*\xmax,0.5*\ymax);
+      
+        % Draw aluminum plates
+        \draw[very thick] (0,0) -- ++ (0,\ymax);
+        \draw[very thick] (\xmax,0) -- ++ (0,\ymax);
+        
+        % Create nodes to label charges for each plate
+        \node at (0.05*\xmax -1.5,0.5*\ymax)[left] {$+$};
+        \node at (0.95*\xmax + 1.5,0.5*\ymax)[right] {$-$};
+      
+        % ELECTRIC FIELD
+        \foreach \i [evaluate={\y=(\i-0.75)*\ymax/(\NE-0.5);}] in {1,...,\NE}{
+          \draw[EFieldLine] (0,\y) -- (\xmax,\y);
+        }
+
+        \foreach \i [evaluate={\x=(\i)*\xmax/\NQ;}] in {1,...,4}{
+          \draw[EcolEP,thick] (\x,0) --++ (0,\ymax);
+        }
+
+        % Include distance labels as nodes
+        \foreach [
+            evaluate=\x as \i using \x*\xmax/\NQ,
+            evaluate=\x as \d using \x*5,
+        ] \x in {0,...,\NQ}{
+            \node at (\i,0)[below] {$\d$ cm};
+        }
+        
+        % Include voltage labels as nodes
+        \node at(0,\ymax)[above] {$0$ V};
+        \node at(\xmax/\NQ,\ymax)[above] {$0$ V};
+        \node at(2 * \xmax/\NQ,\ymax)[above] {$0$ V};
+        \node at(3 * \xmax/\NQ,\ymax)[above] {$0$ V};
+        \node at(4 * \xmax/\NQ,\ymax)[above] {$0$ V};
+        \node at(\xmax,\ymax)[above] {$0$ V};
+      \end{tikzpicture}
+      \caption{Equipotential Lines and Electric Field Lines Through Air}
+      \label{fig:NoConductivePaper}
+    \end{figure}
+    
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+          axis lines = left,
+          xlabel = \(\text{Distance (cm)}\),
+          ylabel = {\(\text{Voltage (V)}\)},
+          xmin = 0, xmax = 25,
+          ymin = 0, ymax = 3.1,
+          ]
+          \addplot[mark=*,mark size=1.5,mark options={solid,fill=black},only marks] coordinates {(0,0) (5,0) (10,0) (15,0) (20,0) (25,0)};
+
+          % Linear regression
+          \addplot[mark=none,thick,myred] coordinates {(0,0) (25,0)};
+        \end{axis}
+      \end{tikzpicture}
+      \caption{Voltage vs Distance No Conductive Paper}
+      \label{fig:NoConductivePaperGraph}
+    \end{figure}
+
+    \section{Analysis}
+    \begin{enumerate}[1)]
+      \item \textbf{In the first experiment, sketch the equipotential lines and the electric field. Graph V vs x.}
+      
+      Refer to \autoref{fig:CarbonPaper} and \autoref{fig:CarbonPaperGraph}.
+      \item \textbf{Why is there a 2-3 volt difference between the aluminum and the paper?  Be specific...use the language of conductor, resistor, etc.}
+      
+      There is resistance in the paper, so the voltage is lower than the voltage on the aluminum plates. As $\Delta V = IR$, there is a voltage drop between the aluminum plates and the paper because resistance is present. As such, at 0 cm, the voltage is 2 to 3 V lower than 9V and why at 25 cm, the voltage is greater than 0 V.
+      \item \textbf{Measure the resistance from one end to the other---what current is flowing through this system, in amps?}
+      \begin{gather*}
+        R = 4900 \Omega \\
+        I = \frac{V}{R} = \frac{9}{4900} = 0.00184 \text{ A}
+      \end{gather*}
+      \item \textbf{For the second experiment, sketch the equipotential lines and the electric field.  Graph V vs x. }
+      
+      Refer to \autoref{fig:AluminumCarbonPaper} and \autoref{fig:AluminumCarbonPaperGraph}.
+      \item \textbf{How is this example different than the previous experiment? Why are these differences there?}
+      
+      This example is different because aluminum is a good conductor, and therefore there is little resistance in the aluminum. As such, from $\Delta V = IR$, there is little voltage drop traveling through the aluminum. By placing the aluminum in the middle of the paper, the voltage drops as it travels through the paper, then remains nearly the same as it travels through the aluminum, and then proceeds to drop again as it travels through the paper. The electric field is also weaker because we increased the distance between the plates.
+
+      \item \textbf{For the third case, why do you get a frustratingly simple graph?}
+      
+      The graph is simple because there is no electric field through the table.
+      \item \textbf{Is there any other combination of conductor and insulator (semi-conductor, in this case) that you'd like to try?  Set it up.}
+      
+      We tried a similar experiment to Experiment 1, but instead of using carbon paper, we used aluminum foil. However, due to the low resistance in the aluminum foil, we created a large current, causing the battery to short circuit.
+    \end{enumerate}
+\end{document}
