@@ -1,0 +1,232 @@
+%++++++++++++++++++++++++++++++++++++++++
+\documentclass[article, 12pt]{article}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{tabu} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{tikz}
+\usepackage{caption} 
+\usepackage{fancyhdr}
+\usepackage{amssymb} % symbols like /therefore
+\usepackage{amsthm} % proofs
+\usepackage{enumerate} % lettered lists
+\usepackage{mathtools} % macros
+\usepackage{multirow} % multirow tables
+\usepackage{pgfplots} % plots
+\usetikzlibrary{scopes}
+% \usepackage{xcolor} \pagecolor[rgb]{0.12549019607,0.1294117647,0.13725490196} \color[rgb]{0.82352941176,0.76862745098,0.62745098039} % dark theme
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{tikz,pgfplots}
+\usepackage[outline]{contour} % glow around text
+\usetikzlibrary{calc}
+\usetikzlibrary{angles,quotes} % for pic
+\usetikzlibrary{arrows.meta}
+\tikzset{>=latex} % for LaTeX arrow head
+\contourlength{1.2pt}
+
+\colorlet{xcol}{blue!70!black}
+\definecolor{babyblueeyes}{rgb}{0.63, 0.79, 0.95}
+\colorlet{vcol}{green!60!black}
+\colorlet{myred}{red!70!black}
+\colorlet{myblue}{blue!70!black}
+\colorlet{mygreen}{green!70!black}
+\colorlet{mydarkred}{myred!70!black}
+\colorlet{mydarkblue}{myblue!60!black}
+\colorlet{mydarkgreen}{mygreen!60!black}
+\colorlet{acol}{red!50!blue!80!black!80}
+\tikzstyle{CM}=[red!40!black,fill=red!80!black!80]
+\tikzstyle{xline}=[xcol,thick,smooth]
+\tikzstyle{mass}=[line width=0.6,red!30!black,fill=red!40!black!10,rounded corners=1,
+                  top color=red!40!black!20,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{faded mass}=[dashed,line width=0.1,red!30!black!40,fill=red!40!black!10,rounded corners=1,
+                        top color=red!40!black!10,bottom color=red!40!black!10,shading angle=20]
+\tikzstyle{rope}=[brown!70!black,very thick,line cap=round]
+\def\rope#1{ \draw[black,line width=1.4] #1; \draw[rope,line width=1.1] #1; }
+\tikzstyle{force}=[->,myred,very thick,line cap=round]
+\tikzstyle{velocity}=[->,vcol,very thick,line cap=round]
+\tikzstyle{Fproj}=[force,myred!40]
+\tikzstyle{myarr}=[-{Latex[length=3,width=2]},thin]
+\def\tick#1#2{\draw[thick] (#1)++(#2:0.12) --++ (#2-180:0.24)}
+\DeclareMathOperator{\sn}{sn}
+\DeclareMathOperator{\cn}{cn}
+\DeclareMathOperator{\dn}{dn}
+\def\N{80} % number of samples in plots
+
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+\usepackage{siunitx} % units
+\usepackage{verbatim} 
+\usepackage[outline]{contour} % glow around text
+
+\newcommand{\labTitle}{Capacitor Lab}
+\newcommand{\class}{AP Physics C}
+\newcommand{\professor}{Mr. Perkins}
+\newcommand{\name}{Denny Cao}
+\pagestyle{fancy}
+\fancyhf{}% clears all header and footer fields
+\fancyfoot[C]{--~\thepage~--}
+\renewcommand*{\headrulewidth}{0.4pt}
+\renewcommand*{\footrulewidth}{0pt}
+\lhead{\name}
+\chead{\class: \labTitle}
+\rhead{\professor}
+
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% clears all header and footer fields
+  \fancyfoot[C]{--~\thepage~--}%
+  \renewcommand*{\headrulewidth}{0pt}%
+  \renewcommand*{\footrulewidth}{0pt}%
+}
+
+% Shortcuts
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil} % ceil function
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % floor function
+
+\DeclarePairedDelimiter\paren{(}{)} % parenthesis
+
+\newcommand{\df}{\displaystyle\frac} % displaystyle fraction
+\newcommand{\qeq}{\overset{?}{=}} % questionable equality
+
+\newcommand{\Mod}[1]{\;\mathrm{mod}\; #1} % modulo operator
+
+% Sets
+\DeclarePairedDelimiter\set{\{}{\}}
+\newcommand{\unite}{\cup}
+\newcommand{\inter}{\cap}
+
+\newcommand{\reals}{\mathbb{R}} % real numbers: textbook is Z^+ and 0
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\rats}{\mathbb{Q}}
+
+\newcommand{\degree}{^\circ}
+\newcommand{\tplint}[6]{\int\limits^{#1}_{#2}\int\limits^{#3}_{#4}\int\limits^{#5}_{#6}} % triple integral bounds
+% Counting
+\newcommand{\dblint}[4]{\int\limits^{#1}_{#2}\int\limits^{#3}_{#4}} % double integral bounds
+\newcommand{\sglint}[2]{\int\limits^{#1}_{#2}} % integral bounds
+\newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength\parindent{0pt}
+
+% Sign Charts
+\newdimen\tcolw \tcolw=2.5em % the column width
+\edef\ecatcode{\catcode`&=\the\catcode`&\relax}\catcode`&=4
+\def\sgchart#1#2{\vbox{\offinterlineskip\halign{\hfil##\quad&##\hfil\crcr\sgchartA#2,:,%
+   \omit\sgchartR&\kern.2pt\sgchartS{.5\tcolw}\relax\sgchartE#1,\relax,%
+   \sgchartS{.5\tcolw}\relax\cr
+   \noalign{\kern2pt}&\def~{}\kern.5\tcolw\sgchartD#1,\relax,\cr}}}
+\def\sgchartA#1:#2,{\cr\ifx,#1,\else $#1$&\sgchartB#2{}\expandafter\sgchartA\fi}
+\def\sgchartB#1{\hbox to\tcolw{\hss$#1$\hss}\sgchartC}
+\def\sgchartC#1{\ifx,#1,\else
+   \strut\vrule\kern-.4pt\hbox to\tcolw{\hss$#1$\hss}\expandafter\sgchartC\fi}
+\def\sgchartD#1#2,{\ifx\relax#1\else\hbox to\tcolw{\hss$#1#2$\hss}\expandafter\sgchartD\fi}
+\def\sgchartE#1#2,{\ifx\relax#1\else
+    \ifx~#1\sgchartS\tcolw\circ \else\sgchartS\tcolw\bullet\fi \expandafter\sgchartE\fi}
+\def\sgchartR{\leaders\vrule height2.8pt depth-2.4pt\hfil}
+\def\sgchartS#1#2{\hbox to#1{\kern-.2pt\sgchartR \ifx\relax#2\else
+   \kern-.7pt$#2$\kern-.7pt\sgchartR\fi\kern-.2pt}}
+\ecatcode
+%++++++++++++++++++++++++++++++++++++++++
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\labTitle}}
+    \normalsize\vspace{0.1in}\\
+    \vspace{0.1in}\large{\text{\class: \professor}}
+    \vspace{3in}
+}
+
+\author{\name}
+\date{Due: February 22, 2023}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{empty}
+    \pagebreak
+    \section{Air Capacitor}
+    In this analogy:
+    \begin{enumerate}[a)]
+        \item \textbf{Air (Volume) =} Electric Field
+        \item \textbf{Balloon =} Capacitor 
+        \item \textbf{Flow of air (Volume/Second) =} Current
+        \item \textbf{Pressure of air =} Voltage
+        \item \textbf{What effect does higher pressure have?}
+        
+        Higher pressure causes the balloon to expand away from the air source.
+        \item\textbf{If air flows in one side, does air flow out of the other?}
+        
+        Yes.
+        \item \textbf{What does a ``charged'' capacitor look like?}
+        
+        A charged capacitor in this analogy is a stretched balloon.
+        \item \textbf{How might you keep a capacitor ``charged?''}
+        
+        Cover one side of the balloon and blow air into the other side.
+        \item \textbf{What is true about the current at the beginning of ``charging'' the capacitor and at the end of charging it?}
+        
+        The current at the beginning is greater than the current at the end, as the capacitor reduces the current.
+    \end{enumerate}
+    
+    \section{Real Capacitor}
+    \begin{enumerate}[a)]
+        \item \textbf{Choose a capacitor and resistor that together give you a single or double digit time constant (R*C). Make sure you write down the values of each. Your time constant should be between 5 and 100 seconds. Any longer or shorter becomes very difficult to handle.}
+        \begin{align}
+            R &= \text{\SI{100}{\kilo\ohm}}\\
+            C &= \text{\SI{220}{\micro\farad}}\\
+            R \cdot C &= \text{\SI{22}{\second}}
+        \end{align}
+        \item \textbf{Use Two D-cell batteries. Make sure you know the initial value of the voltage from the batteries.}
+        \begin{equation}
+            \text{\SI{1.5}{\volt}}
+        \end{equation}
+        \item \textbf{Connect the capacitor and resistor in series. Immediately take voltage readings across the capacitor. Start a stopwatch at the same time (use your phone).  Make a table of voltage vs time across the capacitor.} 
+        \begin{figure}[H]
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                Time (s) & Voltage (V) across Capacitor & Voltage (V) across Resistor \\
+                \hline
+                0 & 0 & 1.5 \\
+                10 & 0.55 & 1.0 \\
+                20 & 0.91 & 0.64 \\
+                30 & 1.15 & 0.41 \\
+                40 & 1.3 & 0.19 \\
+                50 & 1.39 & 0.17 \\
+                60 & 1.45 & 0.12 \\
+                70 & 1.48 & 0.08 \\
+                80 & 1.5 & 0.05 \\
+                \hline
+            \end{tabular}
+            \caption{Voltage vs Time}
+        \end{figure}
+        \item \textbf{Do the same, but connect the multimeter across the resistor. Is there any difference in the graphs?}
+        
+        Voltage increases exponentially across the capacitor, while voltage decreases exponentially across the resistor.
+        \item \textbf{Set up the multimeter to measure current. Does it matter which part of the circuit you use? What do you have to do differently when setting up the meter for current measurement?}
+        
+        It does not matter which part of the circuit you use. To measure current, you attach voltage probes to the ends of the wire.
+    \end{enumerate}
+
+    \section{Questions}
+    \begin{enumerate}[a)]
+        \item \textbf{Identify the time constant on your graphs, 1RC, 2RC, 3RC, etc.  What percentage of the original measurement are each?}
+        \item \textbf{What function could explain this graph?}
+        \item \textbf{Why is the graph shaped the way it is? (hint: think about the analogy with an air capacitor, and think about how much work is required to put more charges on a charging capacitor)}
+        \item \textbf{What is true about the current at the beginning of the process? At the end?}
+    \end{enumerate}
+\end{document}
