@@ -161,16 +161,16 @@
     \section{Air Capacitor}
     In this analogy:
     \begin{enumerate}[a)]
-        \item \textbf{Air (Volume) =} Electric Field
+        \item \textbf{Air (Volume) =} Charge
         \item \textbf{Balloon =} Capacitor 
         \item \textbf{Flow of air (Volume/Second) =} Current
         \item \textbf{Pressure of air =} Voltage
         \item \textbf{What effect does higher pressure have?}
         
-        Higher pressure causes the balloon to expand away from the air source.
+        Higher pressure causes the balloon to expand.
         \item\textbf{If air flows in one side, does air flow out of the other?}
         
-        Yes.
+        Yes. Air is pushed out of the other side.
         \item \textbf{What does a ``charged'' capacitor look like?}
         
         A charged capacitor in this analogy is a stretched balloon.
@@ -179,7 +179,7 @@
         Cover one side of the balloon and blow air into the other side.
         \item \textbf{What is true about the current at the beginning of ``charging'' the capacitor and at the end of charging it?}
         
-        The current at the beginning is greater than the current at the end, as the capacitor reduces the current.
+        The current decreases as the capacitor is charged. 
     \end{enumerate}
     
     \section{Real Capacitor}
@@ -191,9 +191,8 @@
             R \cdot C &= \text{\SI{22}{\second}}
         \end{align}
         \item \textbf{Use Two D-cell batteries. Make sure you know the initial value of the voltage from the batteries.}
-        \begin{equation}
-            \text{\SI{1.5}{\volt}}
-        \end{equation}
+        
+        Each D-cell battery has a voltage of \SI{1.5}{\volt}. We did this lab using just one D-cell battery.
         \item \textbf{Connect the capacitor and resistor in series. Immediately take voltage readings across the capacitor. Start a stopwatch at the same time (use your phone).  Make a table of voltage vs time across the capacitor.} 
         \begin{figure}[H]
             \centering
@@ -213,20 +212,124 @@
                 \hline
             \end{tabular}
             \caption{Voltage vs Time}
+            \label{fig:voltageTable}
+        \end{figure}
+        \pgfdeclarelayer{foreground layer} 
+        \pgfsetlayers{main,foreground layer}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=Time (s),
+                    ylabel=Voltage (V),
+                    xmin=0,
+                    xmax=100,
+                    ymin=0,
+                    ymax=2,
+                    legend pos=north west,
+                    legend style={at={(0.5,1.03)},anchor=north},
+                    ]
+                    % PLot voltage across capacitor vs time from the table above. Use exponential regression to fit the data.
+                    \addplot[only marks,mark=*,color=blue] coordinates {(0,0) (10,0.55) (20,0.91) (30,1.15) (40,1.3) (50,1.39) (60,1.45) (70,1.48) (80,1.5)};
+
+                    \addplot[smooth,mark=none,color=red] plot [domain=0:100] {1.5 - 1.5*exp(-x/22)};
+                    
+                    % Mark Time Constants 1RC, 2RC, 3RC, 4RC as ticks along the x-axis; label them as 1RC, 2RC, 3RC, 4RC respectively.
+                    \begin{pgfonlayer}{foreground layer} 
+                        \node [below, rotate=90, anchor=west,] at (22,0) {1RC};
+                        \node [below, rotate=90, anchor=west,] at (44,0) {2RC};
+                        \node [below, rotate=90, anchor=west,] at (66,0) {3RC};
+                        \node [below, rotate=90, anchor=west,] at (88,0) {4RC};
+
+                        % Draw dashed vertical lines at 1RC, 2RC, 3RC, 4RC
+                        \draw [-, color=black] (22,0) -- (22,5);
+                        \draw [-, color=black] (44,0) -- (44,5);
+                        \draw [-, color=black] (66,0) -- (66,5);
+                        \draw [-, color=black] (88,0) -- (88,5);
+                    \end{pgfonlayer}
+                    \addlegendentry{Experimental}
+                    \addlegendentry{Theoretical}
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Voltage vs Time for Capacitor}
+            \label{fig:capacitor}
         \end{figure}
         \item \textbf{Do the same, but connect the multimeter across the resistor. Is there any difference in the graphs?}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=Time (s),
+                    ylabel=Voltage (V),
+                    xmin=0,
+                    xmax=100,
+                    ymin=0,
+                    ymax=2,
+                    legend pos=north west,
+                    legend style={at={(0.5,1.03)},anchor=north},
+                    ]
+                    % PLot voltage across resistor vs time from the table above. Use exponential regression to fit the data.
+                    \addplot[only marks,mark=*,color=blue] coordinates {(0,1.5) (10,1.0) (20,0.64) (30,0.41) (40,0.19) (50,0.17) (60,0.12) (70,0.08) (80,0.05)};
+                    \addplot[smooth,mark=none,color=red] plot [domain=0:100] {1.5*exp(-x/22)};
+
+                    % Mark Time Constants 1RC, 2RC, 3RC, 4RC as ticks along the x-axis; label them as 1RC, 2RC, 3RC, 4RC respectively.
+                    \begin{pgfonlayer}{foreground layer} 
+                        \node [below, rotate=90, anchor=west,] at (22,0) {1RC};
+                        \node [below, rotate=90, anchor=west,] at (44,0) {2RC};
+                        \node [below, rotate=90, anchor=west,] at (66,0) {3RC};
+                        \node [below, rotate=90, anchor=west,] at (88,0) {4RC};
+
+                        % Draw dashed vertical lines at 1RC, 2RC, 3RC, 4RC
+                        \draw [-, color=black] (22,0) -- (22,5);
+                        \draw [-, color=black] (44,0) -- (44,5);
+                        \draw [-, color=black] (66,0) -- (66,5);
+                        \draw [-, color=black] (88,0) -- (88,5);
+                    \end{pgfonlayer}
+                    \addlegendentry{Experimental}
+                    \addlegendentry{Theoretical}
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Voltage vs Time for Resistor}
+            \label{fig:resistor}
+        \end{figure}
         
-        Voltage increases exponentially across the capacitor, while voltage decreases exponentially across the resistor.
+        Voltage increases at a decreasing rate across the capacitor over time, while voltage across the resistor decreases at a decreasing rate over time.
         \item \textbf{Set up the multimeter to measure current. Does it matter which part of the circuit you use? What do you have to do differently when setting up the meter for current measurement?}
         
-        It does not matter which part of the circuit you use. To measure current, you attach voltage probes to the ends of the wire.
+        It does not matter which part of the circuit you use. To measure current, you connect the multimeter in series with the circuit so the same amount of current flows through the multimeter as through the circuit.
     \end{enumerate}
 
     \section{Questions}
     \begin{enumerate}[a)]
         \item \textbf{Identify the time constant on your graphs, 1RC, 2RC, 3RC, etc.  What percentage of the original measurement are each?}
+        
+        \begin{figure}[H]
+            \centering
+            \begin{tabular}{|c|c|c|}
+                % Multirow for 2 columns; Time Constant and Percentage of Maximum. Percentage of Maximum will have Voltage and Current in the second column.
+                \hline
+                \multirow{2}{*}{Time Constant} & \multicolumn{2}{c|}{Percentage of Maximum Voltage} \\
+                \cline{2-3}
+                & Capacitor & Resistor \\
+                \hline
+                0RC & 0\% & 100\% \\
+                (10/11)RC & 36.67\% & 66.67\% \\
+                (20/11)RC & 86.67\% & 12.67\% \\
+                (30/11)RC & 96.67\% & 8\% \\
+                (40/11)RC & 100\% & 3.33\% \\
+                \hline
+            \end{tabular}
+            \caption{Percentage of Maximum Voltages for Capacitor and Resistor}
+        \end{figure}
         \item \textbf{What function could explain this graph?}
+        
+        \begin{equation}
+            V(t) = V_0e^{-t/{RC}}
+        \end{equation}
         \item \textbf{Why is the graph shaped the way it is? (hint: think about the analogy with an air capacitor, and think about how much work is required to put more charges on a charging capacitor)}
+        
+        More work is required to put more charge as the capacitor increases in charge. As such, the rate at which the capacitor charges decreases as the capacitor charges. As voltage is the electric potential, the voltage will increase at a decreasing rate as the capacitor charges since the rate at which the capacitor charges decreases.
         \item \textbf{What is true about the current at the beginning of the process? At the end?}
+        At the beginning of the process, the current is $I = \displaystyle{\frac{V_{\text{total}}}{R}}$ and decreases at a decreasing rate as the capacitor charges until the current is 0 at the end of the process.
     \end{enumerate}
 \end{document}
