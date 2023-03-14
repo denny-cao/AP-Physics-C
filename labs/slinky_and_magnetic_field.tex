@@ -121,7 +121,7 @@
 \newcommand{\sglint}[2]{\int\limits^{#1}_{#2}} % integral bounds
 \newcommand\perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
 \newcommand\comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
-
+\sisetup{input-digits = 0123456789\pi}
 \setlength\parindent{0pt}
 
 % Sign Charts
@@ -172,7 +172,7 @@
           \centering
           \begin{tabular}{|c|c|}
             \hline
-            Current in Solenoid $I$ (\si{\ampere}) & Magnetic Field $B$ (\si{\tesla})\\
+            Current in Solenoid $I$ (\si{\ampere}) & Magnetic Field $B$ (\si{\milli\tesla})\\
             \hline
             0.5 & 0.0547 \\
             1.0 & 0.1579 \\
@@ -205,7 +205,7 @@
             \hline
             \multicolumn{3}{|c|}{Current in Solenoid $I$ (\si{\ampere}): 1.5}\\
             \hline
-            Length of Solenoid (\si{\meter}) & Turns/\si{\meter} (\si{\meter^{-1}}) & Magnetic Field (\si{\tesla})\\
+            Length of Solenoid (\si{\meter}) & Turns/\si{\meter} (\si{\meter^{-1}}) & Magnetic Field (\si{\milli\tesla})\\
             \hline
             0.5 & 166 & 0.2699 \\
             1.0 & 83 & 0.2101 \\
@@ -237,7 +237,7 @@
             \begin{tikzpicture}
                \begin{axis}[
                   xlabel=Curent (\si{\ampere}),
-                  ylabel=Magnetic Field (\si{\tesla}),
+                  ylabel=Magnetic Field (\si{\milli\tesla}),
                   xmin=0,
                   xmax=2.5,
                   ymin=0,
@@ -261,17 +261,66 @@
          \item \textbf{Determine the equation of the best-fit line, including the y-intercept. Note the constants and
          their units.}
 
-         The equation of the best-fit line is: $B(I) = 0.15294I - 0.01245$.
+         The equation of the best-fit line is: $B(I) = 0.15294I - 0.01245$. The slope is \SI{0.15294}{\milli\tesla/\ampere}. The $y$-intercept is \SI{-0.01245}{\milli\tesla}. The graph is shown in \autoref{fig:currentPlot}.
          \item \textbf{For each of the measurements of Part II, calculate the number of turns per meter. Enter these
          values in the data table.}
+
+         Refer to \autoref{fig:spacing} for the data table. The number of turns per meter is calculated by dividing the number of turns by the length of the solenoid.
          \item \textbf{Plot a graph of magnetic field $B$ vs. the turns per meter of the solenoid ($n$).}
+         
+         \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+               \begin{axis}[
+                  xlabel=Turns/\si{\meter} (\si{\meter^{-1}}),
+                  ylabel=Magnetic Field (\si{\milli\tesla}),
+                  xmin=0,
+                  xmax=200,
+                  ymin=0,
+                  ymax=.35,
+                  legend pos=north west,
+                  legend style={at={(0.5,1.1)},anchor=north},
+                  ]
+                  % Plot data
+                  \addplot[only marks,mark=*,color=blue] coordinates {(166,0.2699) (83,0.2101) (55.3,0.1484) (41.5,0.1190)};
+
+                  % Plot best fit line y=mx+b
+                  \addplot[domain=0:200,smooth,red] {0.00115465*x+0.0870302};
+                  \addlegendentry{Experimental}
+                  \addlegendentry{Best Fit Line}
+               \end{axis}
+            \end{tikzpicture}
+            \caption{Magnetic Field and Spacing of Turns Relationship in Solenoid}
+            \label{fig:spacingPlot}
+         \end{figure}
          \item \textbf{How is magnetic field related to the turns/meter of the solenoid?}
+         
+         Magnetic field is directly proportional to the turns/meter of the solenoid.
          \item \textbf{Determine the equation of the best-fit line to your graph. Note the constants and their units.}
+         
+         The equation of the best-fit line is: $B(n) = 0.00115465n + 0.0870302$. The slope is \SI{0.00115465}{\milli\tesla/\meter}. The $y$-intercept is \SI{0.0870302}{\milli\tesla}. The graph is shown in \autoref{fig:spacingPlot}.
          \item \textbf{From Ampere's law, it can be shown that the magnetic field $B$ inside a long solenoid
-         is $B =\mu_0 n I$ where $\mu_0$ isthe permeability constant. Do your results agree with this equation? Explain.}
+         is $B =\mu_0 n I$ where $\mu_0$ is the permeability constant. Do your results agree with this equation? Explain.}
+
+         Ampere's law suggests that $B$ is proportional to $I$, which agrees with \autoref{fig:currentPlot}. It also suggests that $B$ is proportional to $n$, which agrees with \autoref{fig:spacingPlot}.
          \item \textbf{Assuming the equation in the previous question applies for your solenoid, calculate the value
          of $\mu_0$ using your graph of $B$ vs. $n$.}
+         \begin{align}
+            I &= 1.5 \text{ A} \nonumber \\
+            \mu_0 &= \frac{B}{nI} \nonumber \\
+                  &= \frac{B}{1.5n} \nonumber \\
+            \intertext{$B/n$ is the slope of \autoref{fig:spacingPlot}. The slope is \SI{1.15465e-3}{\milli\tesla/\meter}, or \SI{1.15465e-6}{\tesla/\meter}.}
+            \mu_0 &= \frac{1.15465 \times 10^{-6}}{1.5} \nonumber \\
+                  &\approx \text{\SI{7.69767e-7}{\newton/\ampere^2}}
+         \end{align}
          \item \textbf{Look up the value of $\mu_0$, the permeability constant. Compare it to your experimental value.}
+         
+         The value of $\mu_0$ is \SI{4\pi e-7}{\newton/\ampere^2}. The experimental value is \SI{7.69767e-7}{\newton/\ampere^2}. We compute the percent error as:
+         \begin{align}
+            \delta &= \frac{|\text{Experimental Value} - \text{Theoretical Value}|}{\text{Theoretical Value}} \nonumber \\
+                  &= \frac{7.69767 \times 10^{-7} - 4\pi \times 10^{-7}}{4\pi \times 10^{-7}} \nonumber \\
+                  &\approx 38.74\%
+         \end{align}
          \item \textbf{Was your Slinky positioned along an east-west, north-south, or on some other axis? Will this
          have any effect on your readings?}
      \end{enumerate}

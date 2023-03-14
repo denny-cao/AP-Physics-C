@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.1.12)  14 MAR 2023 15:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.1.12)  14 MAR 2023 16:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -802,6 +802,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 \pgf@layerbox@foreground layer=\box83
 \pgf@layerboxsaved@foreground layer=\box84
 
+Overfull \hbox (2.96378pt too wide) in paragraph at lines 264--265
+[]\OT1/cmr/m/n/12 The equa-tion of the best-fit line is: $\OML/cmm/m/it/12 B\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 I\OT1/cmr/m/n/12 ) = 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 15294\OML/cmm/m/it/12 I \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 01245$. The slope is $0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 152 94$$[]\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 A$.
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -825,23 +829,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[5] (./slinky_and_magnetic_field.aux)
+[5]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[6] (./slinky_and_magnetic_field.aux)
 Package rerunfilecheck Info: File `slinky_and_magnetic_field.out' has not changed.
 (rerunfilecheck)             Checksum: BCFBB7E410491F65E0625A4B460EF147;1296.
  ) 
 Here is how much of TeX's memory you used:
- 38964 strings out of 478287
- 918655 string characters out of 5849289
- 1259242 words of memory out of 5000000
- 56548 multiletter control sequences out of 15000+600000
- 478329 words of font info for 63 fonts, out of 8000000 for 9000
+ 38991 strings out of 478287
+ 919097 string characters out of 5849289
+ 1260341 words of memory out of 5000000
+ 56569 multiletter control sequences out of 15000+600000
+ 478974 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,20n,89p,775b,2523s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,20n,89p,775b,2544s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on slinky_and_magnetic_field.pdf (5 pages, 83550 bytes).
+Output written on slinky_and_magnetic_field.pdf (6 pages, 92180 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
+ 140 PDF objects out of 1000 (max. 8388607)
+ 117 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
  69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
