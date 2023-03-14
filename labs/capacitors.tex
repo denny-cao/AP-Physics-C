@@ -297,6 +297,46 @@
         \item \textbf{Set up the multimeter to measure current. Does it matter which part of the circuit you use? What do you have to do differently when setting up the meter for current measurement?}
         
         It does not matter which part of the circuit you use. To measure current, you connect the multimeter in series with the circuit so the same amount of current flows through the multimeter as through the circuit.
+        \\[12pt]
+        As $I = \frac{V}{R}$, we can graph the current through the resistor vs time as follows:
+        \begin{equation}
+            I(t) = \frac{V(t)}{R}
+        \end{equation}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=Time (s),
+                    ylabel=Voltage (V),
+                    xmin=0,
+                    xmax=100,
+                    ymin=0,
+                    ymax=0.00002,
+                    legend pos=north west,
+                    legend style={at={(0.5,1.03)},anchor=north},
+                    ]
+                    % PLot voltage across resistor vs time from the table above. Use exponential regression to fit the data.
+                    \addplot[smooth,mark=none,color=red] plot [domain=0:100] {1.5/100000 *exp(-x/22)};
+
+                    % Mark Time Constants 1RC, 2RC, 3RC, 4RC as ticks along the x-axis; label them as 1RC, 2RC, 3RC, 4RC respectively.
+                    \begin{pgfonlayer}{foreground layer} 
+                        \node [below, rotate=90, anchor=west,] at (22,0) {1RC};
+                        \node [below, rotate=90, anchor=west,] at (44,0) {2RC};
+                        \node [below, rotate=90, anchor=west,] at (66,0) {3RC};
+                        \node [below, rotate=90, anchor=west,] at (88,0) {4RC};
+
+                        % Draw dashed vertical lines at 1RC, 2RC, 3RC, 4RC
+                        \draw [-, color=black] (22,0) -- (22,5);
+                        \draw [-, color=black] (44,0) -- (44,5);
+                        \draw [-, color=black] (66,0) -- (66,5);
+                        \draw [-, color=black] (88,0) -- (88,5);
+                    \end{pgfonlayer}
+                    \end{axis}
+            \end{tikzpicture}
+            \caption{Current vs Time}
+            \label{fig:Current}
+        \end{figure}
     \end{enumerate}
 
     \section{Questions}

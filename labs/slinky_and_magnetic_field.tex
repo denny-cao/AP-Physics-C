@@ -172,14 +172,128 @@
           \centering
           \begin{tabular}{|c|c|}
             \hline
-            Current in solenoid $I$ (\si{\ampere}) & Magnetic field $B$ (\si{\tesla})\\
+            Current in Solenoid $I$ (\si{\ampere}) & Magnetic Field $B$ (\si{\tesla})\\
             \hline
-            0.5 & \\
-            1.0 & \\
-            1.5 & \\
-            2.0 & \\
+            0.5 & 0.0547 \\
+            1.0 & 0.1579 \\
+            1.5 & 0.2101 \\
+            2.0 & 0.2922 \\
             \hline
           \end{tabular}
+          \caption{Magnetic Field and Current Relationship in Solenoid}
+          \label{fig:current}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tabular}{|c|c|}
+               \hline
+               Length of Solenoid (\si{\meter}) & 1 \\ 
+               \hline
+               Number of Turns & 83 \\
+               \hline
+               Turns/\si{\meter} (\si{\meter^{-1}}) & 83 \\
+               \hline
+            \end{tabular}
+            \caption{Solenoid Measurements}
+            \label{fig:solenoid}
         \end{figure}
      \subsection{Part 2: Magnetic Field and Spacing of Turns Relationship in Solenoid}
+     \begin{figure}[H]
+         \centering
+         \begin{tabular}{|c|c|c|}
+            \hline
+            \multicolumn{3}{|c|}{Current in Solenoid $I$ (\si{\ampere}): 1.5}\\
+            \hline
+            Length of Solenoid (\si{\meter}) & Turns/\si{\meter} (\si{\meter^{-1}}) & Magnetic Field (\si{\tesla})\\
+            \hline
+            0.5 & 166 & 0.2699 \\
+            1.0 & 83 & 0.2101 \\
+            1.5 & 55.3 & 0.1484 \\
+            2.0 & 41.5 & 0.1190 \\
+            \hline
+         \end{tabular}
+         \caption{Magnetic Field and Spacing of Turns Relationship in Solenoid}
+         \label{fig:spacing}
+     \end{figure}
+
+     \begin{figure}[H]
+         \centering
+         \begin{tabular}{|c|c|}
+            \hline
+            Number of Turns in Slinky & 83 \\
+            \hline
+         \end{tabular}
+         \caption{Solenoid Measurements}
+         \label{fig:slinky}
+     \end{figure}
+     \section{Analysis}
+     \begin{enumerate}[1.]
+         \item \textbf{Plot a graph of the magnetic field $B$ vs. the current $I$ through the solenoid. How is magnetic field related to the current through the solenoid?}
+         \pgfdeclarelayer{foreground layer} 
+         \pgfsetlayers{main,foreground layer}
+         \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+               \begin{axis}[
+                  xlabel=Curent (\si{\ampere}),
+                  ylabel=Magnetic Field (\si{\tesla}),
+                  xmin=0,
+                  xmax=2.5,
+                  ymin=0,
+                  ymax=.35,
+                  legend pos=north west,
+                  legend style={at={(0.5,1.1)},anchor=north},
+                  ]
+                  % Plot data
+                  \addplot[only marks,mark=*,color=blue] coordinates {(0.5,0.0547) (1.0,0.1579) (1.5,0.2101) (2.0,0.2922)};
+
+                  % Plot best fit line y=mx+b
+                  \addplot[domain=0:2.5,smooth,red] {0.15294*x-0.01245};
+                  \addlegendentry{Experimental}
+                  \addlegendentry{Best Fit Line}
+               \end{axis}
+            \end{tikzpicture}
+            \caption{Magnetic Field and Current Relationship in Solenoid}
+            \label{fig:currentPlot}
+         \end{figure}
+         Magnetic field is directly proportional to the current through the solenoid.
+         \item \textbf{Determine the equation of the best-fit line, including the y-intercept. Note the constants and
+         their units.}
+
+         The equation of the best-fit line is: $B(I) = 0.15294I - 0.01245$.
+         \item \textbf{For each of the measurements of Part II, calculate the number of turns per meter. Enter these
+         values in the data table.}
+         \item \textbf{Plot a graph of magnetic field $B$ vs. the turns per meter of the solenoid ($n$).}
+         \item \textbf{How is magnetic field related to the turns/meter of the solenoid?}
+         \item \textbf{Determine the equation of the best-fit line to your graph. Note the constants and their units.}
+         \item \textbf{From Ampere's law, it can be shown that the magnetic field $B$ inside a long solenoid
+         is $B =\mu_0 n I$ where $\mu_0$ isthe permeability constant. Do your results agree with this equation? Explain.}
+         \item \textbf{Assuming the equation in the previous question applies for your solenoid, calculate the value
+         of $\mu_0$ using your graph of $B$ vs. $n$.}
+         \item \textbf{Look up the value of $\mu_0$, the permeability constant. Compare it to your experimental value.}
+         \item \textbf{Was your Slinky positioned along an east-west, north-south, or on some other axis? Will this
+         have any effect on your readings?}
+     \end{enumerate}
+     
+     \section{Extensions}
+     \begin{enumerate}[1.]
+      \item \textbf{Carefully measure the magnetic field at the end of the solenoid. How does it compare to the
+      value at the center of the solenoid? Try to prove what the value at the end should be.}
+      \item \textbf{Study the magnetic field strength inside and around a toroid, a circular-shaped solenoid.}
+      \item \textbf{If you have studied calculus, refer to a calculus-based physics text to see how the equation for
+      the field of a solenoid can be derived from Ampere's law.}
+      \item \textbf{If you look up the permeability constant in a reference, you may find it listed in units
+      of henry/meter. Show that these units are the same as tesla-meter/ampere.}
+      \item \textbf{Take data on the magnetic field intensity vs. position along the length of the solenoid. Check
+      the field intensity at several distances along the axis of the Slinky past the end. Note any
+      patterns you see. Plot a graph of magnetic field ($B$) vs. distance from center. How does the
+      value at the end of the solenoid compare to that at the center? How does the value change as
+      you move away from the end of the solenoid}
+      \item \textbf{Insert a steel or iron rod inside the solenoid and see what effect that has on the field intensity.
+      Be careful that the rod does not short out with the coils of the Slinky. You may need to
+      change the range of the Magnetic Field Sensor.}
+      \item \textbf{Use the graph obtained in Part I to determine the value of $\mu_0$.}
+     \end{enumerate}
+
 \end{document}
